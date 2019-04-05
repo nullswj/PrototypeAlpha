@@ -1,4 +1,4 @@
-package com.swj.prototypealpha.util;
+package com.swj.prototypealpha.swj.util;
 
 import android.content.Context;
 

@@ -1,8 +1,6 @@
 package com.swj.prototypealpha.activity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.swj.prototypealpha.R;
+import com.swj.prototypealpha.swj.ProjectListActivity;
 
 public class MainFragment_l extends Fragment
 {
@@ -28,7 +27,7 @@ public class MainFragment_l extends Fragment
         projectList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),ProjectListActivity.class);
+                Intent intent = new Intent(getActivity(), ProjectListActivity.class);
                 startActivity(intent);
             }
         });

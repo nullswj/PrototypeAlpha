@@ -1,4 +1,4 @@
-package com.swj.prototypealpha.activity;
+package com.swj.prototypealpha.swj;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

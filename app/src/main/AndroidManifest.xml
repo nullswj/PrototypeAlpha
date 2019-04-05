@@ -12,8 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.ProjectInfoActivity" />
-        <activity android:name=".activity.ProjectListActivity" />
+        <activity android:name=".swj.ProjectInfoActivity" />
+        <activity android:name=".swj.ProjectListActivity" />
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/title_activity_main" />

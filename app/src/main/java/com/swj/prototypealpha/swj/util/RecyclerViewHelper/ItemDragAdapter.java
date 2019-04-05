@@ -1,4 +1,4 @@
-package com.swj.prototypealpha.util.RecyclerViewHelper;
+package com.swj.prototypealpha.swj.util.RecyclerViewHelper;
 
 import com.chad.library.adapter.base.BaseItemDraggableAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;

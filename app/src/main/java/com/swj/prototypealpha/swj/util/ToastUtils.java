@@ -1,4 +1,4 @@
-package com.swj.prototypealpha.util;
+package com.swj.prototypealpha.swj.util;
 
 import android.os.Handler;
 import android.os.Looper;

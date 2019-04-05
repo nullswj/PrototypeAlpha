@@ -4,7 +4,7 @@ import android.app.Application;
 
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
-import com.swj.prototypealpha.util.Utils;
+import com.swj.prototypealpha.swj.util.Utils;
 
 public class MyApplication extends Application {
     private static MyApplication appContext;

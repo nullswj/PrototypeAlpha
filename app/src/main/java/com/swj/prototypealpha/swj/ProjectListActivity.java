@@ -1,4 +1,4 @@
-package com.swj.prototypealpha.activity;
+package com.swj.prototypealpha.swj;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -18,8 +18,8 @@ import com.chad.library.adapter.base.callback.ItemDragAndSwipeCallback;
 import com.chad.library.adapter.base.listener.OnItemDragListener;
 import com.chad.library.adapter.base.listener.OnItemSwipeListener;
 import com.swj.prototypealpha.R;
-import com.swj.prototypealpha.util.RecyclerViewHelper.ItemDragAdapter;
-import com.swj.prototypealpha.util.ToastUtils;
+import com.swj.prototypealpha.swj.util.RecyclerViewHelper.ItemDragAdapter;
+import com.swj.prototypealpha.swj.util.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
