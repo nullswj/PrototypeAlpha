@@ -6,7 +6,8 @@ import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 import com.swj.prototypealpha.swj.util.Utils;
 
-public class MyApplication extends Application {
+public class MyApplication extends Application
+{
     private static MyApplication appContext;
 
     public static MyApplication getInstance()
