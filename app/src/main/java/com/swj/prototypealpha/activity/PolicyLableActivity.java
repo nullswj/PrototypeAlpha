@@ -1,15 +1,15 @@
 package com.swj.prototypealpha.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.swj.prototypealpha.R;
@@ -23,9 +23,8 @@ public class PolicyLableActivity extends AppCompatActivity implements View.OnCli
     private TextView  mTvpolicy2;
     private TextView  mTvpolicy3;
     private ViewPager mVpaction;
-    private TextView  itemm;
+    private LinearLayout itemm;
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,30 +40,30 @@ public class PolicyLableActivity extends AppCompatActivity implements View.OnCli
         return true;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void initUI () {
         mToolbar.inflateMenu(R.menu.toolbar_menu);
         mTvpolicy1 = findViewById(R.id.action_policy1);
         mTvpolicy2 = findViewById(R.id.action_policy2);
         mTvpolicy3 = findViewById(R.id.action_policy3);
         mVpaction = findViewById(R.id.action_item);
-        itemm = findViewById(R.id.itemm);
+        itemm=findViewById(R.id.itemm);
 
         mTvpolicy3.setOnClickListener(this);
         mTvpolicy2.setOnClickListener(this);
         mTvpolicy1.setOnClickListener(this);
-        //mVpaction.setOnPageChangeListener(new MyPagerChangeListener());
+        itemm.setOnClickListener(this);
+        mVpaction.setOnPageChangeListener(new MyPagerChangeListener());
 
         List<Fragment> mList = new ArrayList<>();
-        mList.add(new Action1Fragment());
-        mList.add(new Action2Fragment());
-        mList.add(new Action3Fragment());
+        //mList.add(new Action1Fragment());
+        //mList.add(new Action2Fragment());
+        //mList.add(new Action3Fragment());
 
         ActionTabAdapter mAdapter = new ActionTabAdapter
                 (getSupportFragmentManager(), mList);
 
-        //mVpaction.setAdapter(mAdapter);
-        //mVpaction.setCurrentItem(0);
+        mVpaction.setAdapter(mAdapter);
+        mVpaction.setCurrentItem(0);
         mTvpolicy1.setBackgroundColor(Color.LTGRAY);
     }
 
@@ -90,6 +89,9 @@ public class PolicyLableActivity extends AppCompatActivity implements View.OnCli
                 mTvpolicy2.setBackgroundColor(Color.WHITE);
                 mTvpolicy3.setBackgroundColor(Color.LTGRAY);
                 break;
+            case R.id.itemm:
+                Intent intent=new Intent(this,PolicyinfoActivity.class);
+                startActivity(intent);
         }
     }
 

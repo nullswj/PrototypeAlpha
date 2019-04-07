@@ -19,13 +19,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
     </android.support.v7.widget.Toolbar>
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="@mipmap/workproject"
+        app:layout_constraintTop_toBottomOf="@id/toolbarPolicy" />
 
     <LinearLayout
         android:id="@+id/ll_action"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/toolbarPolicy">
+        app:layout_constraintTop_toBottomOf="@id/imageView11">
 
         <TextView
             android:id="@+id/action_policy1"
@@ -33,7 +39,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:text="法律法规" />
+            android:text="法律法规"
+            android:textSize="24dp"/>
 
         <TextView
             android:id="@+id/action_policy2"
@@ -41,7 +48,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:text="地方法规" />
+            android:text="地方法规"
+            android:textSize="24dp"/>
 
         <TextView
             android:id="@+id/action_policy3"
@@ -49,19 +57,37 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:text="内部政策" />
+            android:text="内部政策"
+            android:textSize="24dp"/>
     </LinearLayout>
+
     <LinearLayout
+        android:id="@+id/itemm"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/ll_action">
+
         <TextView
-            android:id="@+id/itemm"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="政策1            法律法规        八月"
-            android:textSize="26dp"
-            android:layout_gravity="center"/>
+            android:layout_weight="2"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            android:text="法律法规1"
+            android:textColor="#000000"
+            android:textSize="22sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:text="10点00分"
+            android:textColor="#000000"
+            android:textSize="22sp" />
+
     </LinearLayout>
 
     <android.support.v4.view.ViewPager

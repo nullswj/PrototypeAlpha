@@ -20,6 +20,7 @@ public class ActionTabAdapter extends FragmentPagerAdapter {
 
     public ActionTabAdapter(FragmentManager fm, List<Fragment> list){
         super(fm);
+        this.mFragmentManager=fm;
         this.mList = list;
     }
 
