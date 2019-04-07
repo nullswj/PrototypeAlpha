@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".activity.PolicyLableActivity"></activity>
         <activity android:name=".swj.ProjectInfoActivity" />
         <activity android:name=".swj.ProjectListActivity" />
         <activity

@@ -12,47 +12,52 @@ import android.widget.ImageButton;
 import com.swj.prototypealpha.R;
 import com.swj.prototypealpha.swj.ProjectListActivity;
 
-public class MainFragment_l extends Fragment
-{
+public class MainFragment_l extends Fragment {
 
     ImageButton projectList;
+    ImageButton policyLable;
 
-    private void initUI()
-    {
+    private void initUI () {
         projectList = getActivity().findViewById(R.id.ibtn_project_information);
+        policyLable = getActivity().findViewById(R.id.ibtn_policy);
     }
 
-    private void setOnclickLisener()
-    {
+    private void setOnclickLisener () {
         projectList.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick (View v) {
                 Intent intent = new Intent(getActivity(), ProjectListActivity.class);
                 startActivity(intent);
             }
         });
+        policyLable.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick (View v) {
+                Intent intent=new Intent(getActivity(),PolicyLableActivity.class);
+                startActivity(intent);
+            }
+        });
     }
+
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    public void onActivityCreated (@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initUI();
         setOnclickLisener();
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView (LayoutInflater inflater, ViewGroup container,
+                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_main_fragment_l, container, false);
     }
-
-
-
 
 
 }
