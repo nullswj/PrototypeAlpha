@@ -16,10 +16,12 @@ public class MainFragment_l extends Fragment {
 
     ImageButton projectList;
     ImageButton policyLable;
+    ImageButton noticeButton;
 
     private void initUI () {
         projectList = getActivity().findViewById(R.id.ibtn_project_information);
         policyLable = getActivity().findViewById(R.id.ibtn_policy);
+        noticeButton = getActivity().findViewById(R.id.ibtn_notice);
     }
 
     private void setOnclickLisener () {
@@ -35,6 +37,13 @@ public class MainFragment_l extends Fragment {
             @Override
             public void onClick (View v) {
                 Intent intent=new Intent(getActivity(),PolicyLableActivity.class);
+                startActivity(intent);
+            }
+        });
+        noticeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(getActivity(),NoticeListActivity.class);
                 startActivity(intent);
             }
         });
