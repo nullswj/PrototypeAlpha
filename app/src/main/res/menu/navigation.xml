@@ -11,4 +11,5 @@
         android:icon="@mipmap/person_information"
         android:title="@string/title_notifications" />
 
+
 </menu>
