@@ -4,17 +4,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.view.View;
 
 import com.swj.prototypealpha.Enity.NoticeEntity;
 import com.swj.prototypealpha.R;
 import com.swj.prototypealpha.swj.util.RecyclerViewHelper.NoticeAdapter;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class NoticeListActivity extends AppCompatActivity {
+    SearchView searchView;
 
     private static final String TAG = NoticeListActivity.class.getSimpleName();
 
@@ -28,6 +29,15 @@ public class NoticeListActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mAdapter);
+        searchView = findViewById(R.id.sv_notice);
+        searchView.setQueryHint("查询通知");
+        searchView.setIconified(true);
+        searchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchView.setIconified(false);
+            }
+        });
 
 
 

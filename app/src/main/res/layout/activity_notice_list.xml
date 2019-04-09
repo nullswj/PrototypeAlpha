@@ -38,14 +38,19 @@
         app:layout_constraintStart_toStartOf="@+id/toolbar_title"
         app:layout_constraintTop_toTopOf="@+id/toolbar_title" />
 
-    <SearchView
-        android:id="@+id/SeachView_notice"
+    <android.support.v7.widget.SearchView
+        android:id="@+id/sv_notice"
+        android:queryHint="搜索通知"
+
         android:layout_width="0dp"
+
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline_notice2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline_notice1" />
+
+
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline_notice1"
