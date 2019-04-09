@@ -10,19 +10,16 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.swj.prototypealpha.R;
-import com.swj.prototypealpha.swj.LaunchActivity;
 import com.swj.prototypealpha.swj.ProjectListActivity;
 
 public class MainFragment_l extends Fragment {
 
     ImageButton projectList;
     ImageButton policyLable;
-    ImageButton launch;
 
     private void initUI () {
         projectList = getActivity().findViewById(R.id.ibtn_project_information);
         policyLable = getActivity().findViewById(R.id.ibtn_policy);
-        launch = getActivity().findViewById(R.id.ibtn_start);
     }
 
     private void setOnclickLisener () {
@@ -38,13 +35,6 @@ public class MainFragment_l extends Fragment {
             @Override
             public void onClick (View v) {
                 Intent intent=new Intent(getActivity(),PolicyLableActivity.class);
-                startActivity(intent);
-            }
-        });
-        launch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), LaunchActivity.class);
                 startActivity(intent);
             }
         });
@@ -68,4 +58,6 @@ public class MainFragment_l extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_main_fragment_l, container, false);
     }
+
+
 }
