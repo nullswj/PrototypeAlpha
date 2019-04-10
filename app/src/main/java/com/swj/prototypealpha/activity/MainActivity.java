@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    tv_title.setText("主页");
+                    tv_title.setText("长沙智慧住建执法平台");
 
                     if(lastFrament != 0)
                     {
