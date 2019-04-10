@@ -1,5 +1,6 @@
 package com.swj.prototypealpha.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,7 +25,7 @@ public class NoticeListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notice_list);
         RecyclerView mRecyclerView = findViewById(R.id.notice_list);
-        List<NoticeEntity> mData = generateData(2);
+        final List<NoticeEntity> mData = generateData(2);
         NoticeAdapter mAdapter = new NoticeAdapter(mData);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
@@ -36,6 +37,20 @@ public class NoticeListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 searchView.setIconified(false);
+            }
+        });
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                Intent intent = new Intent(NoticeListActivity.this,NoticeResultListActivity.class);
+                intent.putExtra("NoticeResult",mData.get(1));
+                startActivity(intent);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
             }
         });
 
