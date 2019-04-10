@@ -24,6 +24,7 @@
         <activity android:name=".activity.LoginActivity"/>
         <activity android:name=".activity.NoticeInfoActivity"/>
         <activity android:name=".activity.NoticeListActivity"/>
+        <activity android:name=".activity.NoticeResultListActivity"/>
         <activity android:name=".activity.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
