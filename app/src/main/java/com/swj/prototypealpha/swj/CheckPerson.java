@@ -75,7 +75,7 @@ public class CheckPerson extends AppCompatActivity implements OnItemClickListene
                 startActivity(intent);
             }
         });
-        personList.add("");
+        personList.add("请选择检查人员");
         personList.add("李四");
         personList.add("王五");
         personList.add("马六");
@@ -88,12 +88,12 @@ public class CheckPerson extends AppCompatActivity implements OnItemClickListene
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Bitmap leftImage = BitmapFactory.decodeResource(getResources(),R.mipmap.checkperson);
                 Bitmap rightArrow = BitmapFactory.decodeResource(getResources(),R.mipmap.add);
-                String name = "";
+                String name = "请选择检查人员";
                 if(position == 1)   name = "李四";
                 else if(position == 2) name = "王五";
                 else if(position == 3) name = "马六";
 
-                if(!name.equals(""))
+                if(!name.equals("请选择检查人员"))
                 {
                     ItemBean item0 = new ItemBean("检查人",name,leftImage,rightArrow);
                     itemList.add(item0);

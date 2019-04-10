@@ -100,7 +100,7 @@ public class PictureFragment extends Fragment {
             e.printStackTrace();
         }
         if(Build.VERSION.SDK_INT >= 24)
-            imageUri = FileProvider.getUriForFile(getActivity(),"com.example.dms.fileprovider",outputImage);
+            imageUri = FileProvider.getUriForFile(getActivity(),"com.swj.prototypealpha.fileprovider",outputImage);
         else
             imageUri = Uri.fromFile(outputImage);
 

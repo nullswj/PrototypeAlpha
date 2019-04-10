@@ -76,7 +76,7 @@ public class AddLocActivity extends AppCompatActivity implements OnItemClickList
             }
         });
 
-        locList.add("");
+        locList.add("请选择检查地点");
         locList.add("地点一");
         locList.add("地点二");
         locList.add("地点三");
@@ -94,7 +94,7 @@ public class AddLocActivity extends AppCompatActivity implements OnItemClickList
                 else if(position == 2) name = "地点二";
                 else if(position == 3) name = "地点三";
 
-                if(!name.equals(""))
+                if(!name.equals("请选择检查地点"))
                 {
                     itemList.remove(3);
 

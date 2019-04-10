@@ -176,7 +176,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView15"
         app:layout_constraintTop_toTopOf="@+id/guideline17"
-        app:srcCompat="@mipmap/add" />
+        app:srcCompat="@mipmap/bigadd" />
 
     <TextView
         android:id="@+id/textView6"

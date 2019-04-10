@@ -10,16 +10,22 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.swj.prototypealpha.R;
+import com.swj.prototypealpha.swj.ImageAdapter;
+import com.swj.prototypealpha.swj.LaunchActivity;
 import com.swj.prototypealpha.swj.ProjectListActivity;
 
 public class MainFragment_l extends Fragment {
 
     ImageButton projectList;
     ImageButton policyLable;
+    ImageButton start;
+    ImageButton notice;
 
     private void initUI () {
         projectList = getActivity().findViewById(R.id.ibtn_project_information);
         policyLable = getActivity().findViewById(R.id.ibtn_policy);
+        start = getActivity().findViewById(R.id.ibtn_start);
+        notice = getActivity().findViewById(R.id.ibtn_notice);
     }
 
     private void setOnclickLisener () {
@@ -35,6 +41,20 @@ public class MainFragment_l extends Fragment {
             @Override
             public void onClick (View v) {
                 Intent intent=new Intent(getActivity(),PolicyLableActivity.class);
+                startActivity(intent);
+            }
+        });
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), LaunchActivity.class);
+                startActivity(intent);
+            }
+        });
+        notice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),NoticeListActivity.class);
                 startActivity(intent);
             }
         });

@@ -4,12 +4,10 @@
     <item
         android:id="@+id/navigation_home"
         android:icon="@mipmap/workplace"
-        android:title="@string/title_home" />
+        android:title="首页" />
 
     <item
         android:id="@+id/navigation_notifications"
         android:icon="@mipmap/person_information"
-        android:title="@string/title_notifications" />
-
-
+        android:title="个人中心" />
 </menu>

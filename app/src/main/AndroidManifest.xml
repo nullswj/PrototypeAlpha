@@ -12,14 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.PolicyinfoActivity"></activity>
+        <activity android:name=".activity.PolicyinfoActivity" />
         <activity android:name=".activity.PolicyLableActivity" />
         <activity android:name=".swj.ProjectInfoActivity" />
         <activity android:name=".swj.ProjectListActivity" />
-        <activity
-            android:name=".activity.MainActivity"
-            android:label="@string/title_activity_main" />
-        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".swj.HistoryAccordActivity"/>
+        <activity android:name=".swj.CheckPerson"/>
+        <activity android:name=".swj.AddLocActivity"/>
+        <activity android:name=".swj.StartActivity"/>
+        <activity android:name=".swj.LaunchActivity"/>
+        <activity android:name=".activity.LoginActivity"/>
+        <activity android:name=".activity.NoticeInfoActivity"/>
+        <activity android:name=".activity.NoticeListActivity"/>
         <activity android:name=".activity.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,6 +31,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity.MainActivity"
+            android:label="@string/title_activity_main" >
+
+        </activity>
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.swj.prototypealpha.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>
