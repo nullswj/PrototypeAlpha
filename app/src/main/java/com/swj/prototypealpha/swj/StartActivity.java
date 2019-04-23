@@ -1,8 +1,5 @@
 package com.swj.prototypealpha.swj;
 
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -14,12 +11,6 @@ import android.widget.TextView;
 
 import com.swj.prototypealpha.R;
 
-import java.io.FileNotFoundException;
-
-import static com.swj.prototypealpha.swj.PictureFragment.TAKE_PHOTO;
-import static com.swj.prototypealpha.swj.PictureFragment.adapter;
-import static com.swj.prototypealpha.swj.PictureFragment.imageUri;
-import static com.swj.prototypealpha.swj.PictureFragment.pictureList;
 
 public class StartActivity extends AppCompatActivity {
     TextView tv_title;

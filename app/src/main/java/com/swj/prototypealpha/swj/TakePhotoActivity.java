@@ -28,6 +28,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import static android.app.Activity.RESULT_FIRST_USER;
+
 public class TakePhotoActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Toolbar tlb_upphoto;
