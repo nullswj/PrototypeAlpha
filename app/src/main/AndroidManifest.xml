@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.PhoneNumberLoginActivity"></activity>
+        <activity android:name=".activity.PhoneNumberLoginActivity"/>
         <activity android:name=".swj.TakePhotoActivity" />
         <activity android:name=".activity.PolicyinfoActivity" />
         <activity android:name=".activity.PolicyLableActivity" />
