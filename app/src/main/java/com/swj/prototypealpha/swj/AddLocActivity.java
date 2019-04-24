@@ -85,13 +85,16 @@ public class AddLocActivity extends AppCompatActivity implements OnItemClickList
     private void Update()
     {
         itemList.clear();
-        Bitmap leftImage = BitmapFactory.decodeResource(getResources(),R.mipmap.detail);
+        Bitmap proj_name = BitmapFactory.decodeResource(getResources(),R.mipmap.project_name);
+        Bitmap startingtime = BitmapFactory.decodeResource(getResources(),R.mipmap.startingtime);
+        Bitmap checkedperson = BitmapFactory.decodeResource(getResources(),R.mipmap.checkedperson);
+        Bitmap checkedaddr = BitmapFactory.decodeResource(getResources(),R.mipmap.proj_addr);
         Bitmap rightArrow = BitmapFactory.decodeResource(getResources(),R.mipmap.right_arrow);
         Bitmap checkperson = BitmapFactory.decodeResource(getResources(),R.mipmap.checkperson);
-        ItemBean item0 = new ItemBean("项目名称","橘子洲大桥提质改造工程",leftImage,rightArrow);
-        ItemBean item1 = new ItemBean("开工时间","2018.09",leftImage,rightArrow);
-        ItemBean item2 = new ItemBean("被检查人","张三",leftImage,checkperson);
-        ItemBean item3 = new ItemBean("检查地点","岳麓区",leftImage,rightArrow);
+        ItemBean item0 = new ItemBean("项目名称","橘子洲大桥提质改造工程",proj_name,rightArrow);
+        ItemBean item1 = new ItemBean("开工时间","2018.09",startingtime,rightArrow);
+        ItemBean item2 = new ItemBean("被检查人","张三",checkedperson,rightArrow);
+        ItemBean item3 = new ItemBean("检查地点","岳麓区",checkedaddr,rightArrow);
 
         itemList.add(item0);
         adapter.notifyItemChanged(0);
