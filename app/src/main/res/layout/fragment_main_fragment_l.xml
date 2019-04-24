@@ -13,7 +13,6 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/imageView2"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:background="@mipmap/maintop"
@@ -24,7 +23,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <android.support.constraint.Barrier
-            android:id="@+id/barrier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="top" />
@@ -111,7 +109,6 @@
             app:layout_constraintTop_toTopOf="@+id/guideline6" />
 
         <TextView
-            android:id="@+id/text_projectLable"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -127,7 +124,6 @@
             app:layout_constraintTop_toBottomOf="@+id/ibtn_project_information" />
 
         <TextView
-            android:id="@+id/text_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -143,7 +139,6 @@
             app:layout_constraintTop_toBottomOf="@+id/ibtn_start" />
 
         <TextView
-            android:id="@+id/text_policyLable"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -159,7 +154,6 @@
             app:layout_constraintTop_toBottomOf="@+id/ibtn_policy" />
 
         <TextView
-            android:id="@+id/text_notice_lable"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
