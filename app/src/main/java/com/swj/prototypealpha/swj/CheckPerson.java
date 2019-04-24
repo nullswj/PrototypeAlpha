@@ -113,14 +113,18 @@ public class CheckPerson extends AppCompatActivity implements OnItemClickListene
     private void Update()
     {
         itemList.clear();
-        Bitmap leftImage = BitmapFactory.decodeResource(getResources(),R.mipmap.detail);
+        Bitmap proj_name = BitmapFactory.decodeResource(getResources(),R.mipmap.project_name);
+        Bitmap proj_addr = BitmapFactory.decodeResource(getResources(),R.mipmap.proj_addr);
+        Bitmap startingtime = BitmapFactory.decodeResource(getResources(),R.mipmap.startingtime);
+        Bitmap checker = BitmapFactory.decodeResource(getResources(),R.mipmap.checker);
+
+
         Bitmap rightArrow = BitmapFactory.decodeResource(getResources(),R.mipmap.right_arrow);
-        Bitmap checkperson = BitmapFactory.decodeResource(getResources(),R.mipmap.checkperson);
-        Bitmap addPerson = BitmapFactory.decodeResource(getResources(),R.mipmap.add);
-        ItemBean item0 = new ItemBean("项目名称","橘子洲大桥提质改造工程",leftImage,rightArrow);
-        ItemBean item1 = new ItemBean("项目地址","岳麓区",leftImage,rightArrow);
-        ItemBean item3 = new ItemBean("开工时间","2018.09",leftImage,rightArrow);
-        ItemBean item4 = new ItemBean("检查人","张三",checkperson,addPerson);
+        Bitmap addPerson = BitmapFactory.decodeResource(getResources(),R.mipmap.check_add);
+        ItemBean item0 = new ItemBean("项目名称","橘子洲大桥提质改造工程",proj_name,rightArrow);
+        ItemBean item1 = new ItemBean("项目地址","岳麓区",proj_addr,rightArrow);
+        ItemBean item3 = new ItemBean("开工时间","2018.09",startingtime,rightArrow);
+        ItemBean item4 = new ItemBean("检查人","张三",checker,addPerson);
 
         itemList.add(item0);
         adapter.notifyItemChanged(0);
