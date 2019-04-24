@@ -86,8 +86,8 @@ public class CheckPerson extends AppCompatActivity implements OnItemClickListene
         spi_add_person.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Bitmap leftImage = BitmapFactory.decodeResource(getResources(),R.mipmap.checkperson);
-                Bitmap rightArrow = BitmapFactory.decodeResource(getResources(),R.mipmap.add);
+                Bitmap leftImage = BitmapFactory.decodeResource(getResources(),R.mipmap.checker);
+                Bitmap rightArrow = BitmapFactory.decodeResource(getResources(),R.mipmap.check_add);
                 String name = "请选择检查人员";
                 if(position == 1)   name = "李四";
                 else if(position == 2) name = "王五";
