@@ -113,6 +113,11 @@ public class AddLocActivity extends AppCompatActivity implements OnItemClickList
     }
 
     @Override
+    public void onDeleteClick(int position) {
+
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
         if(item.getItemId() == android.R.id.home)

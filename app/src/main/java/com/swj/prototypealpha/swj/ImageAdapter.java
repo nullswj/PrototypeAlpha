@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +16,17 @@ import java.util.List;
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> {
 
+    String TAG = "ImageAdapter";
+
     private Context context;
 
     private List<Picture> pictures;
 
-    static class ViewHolder extends RecyclerView.ViewHolder
+
+    public static class ViewHolder extends RecyclerView.ViewHolder
     {
-        CardView cardView;
-        ImageView imageView;
+        public CardView cardView;
+        public ImageView imageView;
 
         public ViewHolder(View view)
         {
@@ -53,11 +57,18 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ImageAdapter.ViewHolder viewHolder, int i) {
         Picture picture = pictures.get(i);
         viewHolder.imageView.setImageBitmap(picture.getImageID());
-
     }
 
     @Override
     public int getItemCount() {
         return pictures.size();
+    }
+
+    public void removeItem(int position) {
+        Log.e(TAG, "removeItem: "+"size"+getItemCount());
+        Log.e(TAG, "removeItem: "+ position);
+        pictures.remove(position);
+        notifyItemRemoved(position);
+        notifyDataSetChanged();
     }
 }

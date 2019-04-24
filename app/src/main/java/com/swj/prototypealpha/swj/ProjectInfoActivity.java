@@ -99,6 +99,12 @@ public class ProjectInfoActivity extends AppCompatActivity implements OnItemClic
         Intent intent = new Intent(ProjectInfoActivity.this,HistoryAccordActivity.class);
         startActivity(intent);
     }
+
+    @Override
+    public void onDeleteClick(int position) {
+
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {

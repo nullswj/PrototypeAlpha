@@ -142,6 +142,12 @@ public class CheckPerson extends AppCompatActivity implements OnItemClickListene
     public void onItemClick(int position) {
 
     }
+
+    @Override
+    public void onDeleteClick(int position) {
+
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {

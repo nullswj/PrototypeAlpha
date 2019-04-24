@@ -3,6 +3,8 @@ package com.swj.prototypealpha.swj;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,17 +14,20 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.swj.prototypealpha.R;
+import com.swj.prototypealpha.swj.util.ItemRemoveRecyclerView;
+import com.swj.prototypealpha.swj.util.OnItemClickListener;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -37,7 +42,7 @@ public class PictureFragment extends Fragment {
 
     private FloatingActionButton fabtn_picture;
 
-    private RecyclerView recv_photo;
+    private ItemRemoveRecyclerView recv_photo;
 
     public static final int TAKE_PHOTO = 1;
 
@@ -62,22 +67,97 @@ public class PictureFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         fabtn_picture = getActivity().findViewById(R.id.fabtn_takephoto);
 
-
         fabtn_picture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 takePhoto();
             }
         });
-        recv_photo = getActivity().findViewById(R.id.recv_photo);
+        recv_photo = (ItemRemoveRecyclerView)getActivity().findViewById(R.id.recv_photo);
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(),2);
         recv_photo.setLayoutManager(layoutManager);
         adapter = new ImageAdapter(pictureList);
 
         recv_photo.setAdapter(adapter);
 
+        recv_photo.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+
+            }
+
+            @Override
+            public void onDeleteClick(int position) {
+                adapter.removeItem(position);
+            }
+        });
+
 
     }
+
+    /**
+     * 读取图片的旋转的角度
+     *
+     * 图片绝对路径
+     * @return 图片的旋转角度
+     */
+    private int getBitmapDegree() {
+        int degree = 0;
+        try {
+            InputStream inputStream = new FileInputStream(outputImage);
+            // 从指定路径下读取图片，并获取其EXIF信息
+            ExifInterface exifInterface = new ExifInterface(inputStream);
+            // 获取图片的旋转信息
+            int orientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION,
+                    ExifInterface.ORIENTATION_NORMAL);
+            switch (orientation) {
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    degree = 90;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    degree = 180;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    degree = 270;
+                    break;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return degree;
+    }
+
+    /**
+     * 将图片按照某个角度进行旋转
+     *
+     * @param bm
+     * 需要旋转的图片
+     * @param degree
+     * 旋转角度
+     * @return 旋转后的图片
+     */
+    public static Bitmap rotateBitmapByDegree(Bitmap bm, int degree) {
+        Bitmap returnBm = null;
+
+        // 根据旋转角度，生成旋转矩阵
+        Matrix matrix = new Matrix();
+        matrix.postRotate(degree);
+        try
+        {
+            // 将原始图片按照旋转矩阵进行旋转，并得到新的图片
+            returnBm = Bitmap.createBitmap(bm, 0, 0, bm.getWidth(), bm.getHeight(), matrix, true);
+        }
+        catch (OutOfMemoryError e) {
+        }
+        if (returnBm == null) {
+            returnBm = bm;
+        }
+        if (bm != returnBm) {
+            bm.recycle();
+        }
+        return returnBm;
+    }
+
 
 
 
@@ -121,6 +201,20 @@ public class PictureFragment extends Fragment {
                     try
                     {
                         Bitmap bitmap = BitmapFactory.decodeStream(getActivity().getContentResolver().openInputStream(imageUri));
+                        switch (getBitmapDegree())
+                        {
+                            case 90:
+                                bitmap = rotateBitmapByDegree(bitmap,90);
+                                break;
+                            case 180:
+                                bitmap = rotateBitmapByDegree(bitmap,180);
+                                break;
+                            case 270:
+                                bitmap = rotateBitmapByDegree(bitmap,270);
+                                break;
+                            default:
+                                break;
+                        }
                         Picture picture = new Picture(bitmap);
                         pictureList.add(picture);
                         int len = pictureList.size();
