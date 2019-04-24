@@ -64,7 +64,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/text_loc_takephoto"
         app:layout_constraintTop_toTopOf="@+id/guideline2"
-        app:srcCompat="@mipmap/duigou" />
+        app:srcCompat="@mipmap/ok" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline2"
