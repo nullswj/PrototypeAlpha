@@ -1,14 +1,8 @@
 <resources>
     <string name="app_name">移动检查</string>
-    <string name="title_activity_main2">Main2Activity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="t_search">搜索</string>
     <string name="projectinfo">~~~~~~~~~~~~~~:~~~~~~~~~~~~~~~~\n~~~~~~~~~~~~~~:~~~~~~~~~~~~~~~~\n~~~~~~~~~~~~~~:~~~~~~~~~~~~~~~~</string>
     <string name="test_context">\u3000\u3000（1988年1月21日第六届全国人民代表大会常务委员会第二十四次会议通过；2002年8月29日第九届全国人民代表大会常务委员会第二十九次会议修订；根据2009年8月27日第十一届全国人民代表大会常务委员会第十次会议《关于修改部分法律的决定》第一次修正；根据2016年7月2日第十二届全国人民代表大会常务委员会第二十一次会议《关于修改《中华人民共和国节约能源法》等部法律的决定》第二次修正）
 \n\u3000\u3000第一章 总则
