@@ -11,4 +11,6 @@
     <!--SearchView-->
     <color name="darkgray">#CCE5E3E3</color>
     <color name="color_white">#FFFFFF</color>
+    <color name="btn_press_color">#5677fc</color>
+    <color name="btn_pressed_color">#3CA0EC</color>
 </resources>

@@ -11,8 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.swj.prototypealpha.R;
 import com.swj.prototypealpha.swj.util.ItemBean;
@@ -34,11 +33,9 @@ public class AddLocActivity extends AppCompatActivity implements OnItemClickList
 
     private List<ItemBean> itemList = new ArrayList<>();
 
-    private List<String> locList = new ArrayList<>();
+    private TextView text_takephoto;
 
     private FloatingActionButton btn_addloc;
-
-    private Spinner spi_add_loc;
 
 
 
@@ -47,7 +44,7 @@ public class AddLocActivity extends AppCompatActivity implements OnItemClickList
         recvv_checkloc = findViewById(R.id.recv_addloc);
         tlb_checkloc = findViewById(R.id.tlb_checkloc);
         btn_addloc = findViewById(R.id.lfbtn_add_loc);
-        spi_add_loc = findViewById(R.id.spi_add_loc);
+        text_takephoto = findViewById(R.id.text_loc_takephoto);
         setSupportActionBar(tlb_checkloc);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -75,41 +72,14 @@ public class AddLocActivity extends AppCompatActivity implements OnItemClickList
                 startActivity(intent);
             }
         });
-
-        locList.add("请选择检查地点");
-        locList.add("地点一");
-        locList.add("地点二");
-        locList.add("地点三");
-        SpinnerAdapter spi_adapter = new SpinnerAdapter(this,locList);
-        spi_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spi_add_loc.setAdapter(spi_adapter);
-
-        spi_add_loc.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        text_takephoto.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Bitmap leftImage = BitmapFactory.decodeResource(getResources(),R.mipmap.checkperson);
-                Bitmap rightArrow = BitmapFactory.decodeResource(getResources(),R.mipmap.add);
-                String name = "";
-                if(position == 1)   name = "地点一";
-                else if(position == 2) name = "地点二";
-                else if(position == 3) name = "地点三";
-
-                if(!name.equals("请选择检查地点"))
-                {
-                    itemList.remove(3);
-
-                    ItemBean item0 = new ItemBean("检查地点",name,leftImage,rightArrow);
-                    itemList.add(item0);
-                    adapter.notifyItemChanged(3);
-                    adapter.notifyItemChanged(0,itemList.size());
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+            public void onClick(View v) {
+                Intent intent = new Intent(AddLocActivity.this,TakePhotoActivity.class);
+                startActivity(intent);
             }
         });
+
     }
 
     private void Update()

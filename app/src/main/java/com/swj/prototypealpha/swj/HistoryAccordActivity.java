@@ -14,7 +14,6 @@ import android.widget.Button;
 
 import com.swj.prototypealpha.R;
 import com.swj.prototypealpha.swj.util.ItemBean;
-import com.swj.prototypealpha.swj.util.OnItemClickListener;
 import com.swj.prototypealpha.swj.util.RecyclerViewHelper.ItemAdapter;
 
 import java.util.ArrayList;
