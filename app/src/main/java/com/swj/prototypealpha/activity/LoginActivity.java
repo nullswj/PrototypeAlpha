@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.swj.prototypealpha.R;
 
@@ -13,14 +14,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private Button btn_login;
 
+    private TextView text_phone_login;
+
     private void initUI()
     {
         btn_login = findViewById(R.id.btn_login);
+        text_phone_login = findViewById(R.id.accountlogin);
     }
 
     private void setOnclickListener()
     {
         btn_login.setOnClickListener(this);
+        text_phone_login.setOnClickListener(this);
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +38,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
+        Intent intent;
         switch (v.getId())
         {
             case R.id.btn_login:
-                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
                 LoginActivity.this.finish();
                 break;
+            case R.id.accountlogin:
+                intent = new Intent(LoginActivity.this,PhoneNumberLoginActivity.class);
+                startActivity(intent);
+                LoginActivity.this.finish();
             default:
                 break;
         }
