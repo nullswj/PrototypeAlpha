@@ -1,5 +1,6 @@
 package com.swj.prototypealpha.swj;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,6 +14,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,6 +34,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import static android.app.Activity.RESULT_FIRST_USER;
 
@@ -73,7 +76,7 @@ public class PictureFragment extends Fragment {
                 takePhoto();
             }
         });
-        recv_photo = (ItemRemoveRecyclerView)getActivity().findViewById(R.id.recv_photo);
+        recv_photo = getActivity().findViewById(R.id.recv_photo);
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(),2);
         recv_photo.setLayoutManager(layoutManager);
         adapter = new ImageAdapter(pictureList);
@@ -87,8 +90,25 @@ public class PictureFragment extends Fragment {
             }
 
             @Override
-            public void onDeleteClick(int position) {
-                adapter.removeItem(position);
+            public void onDeleteClick(int position)
+            {
+                final int pos = position;
+                AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
+                dialog.setTitle("照片");
+                dialog.setMessage("确认删除吗？");
+                dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        adapter.removeItem(pos);
+                    }
+                });
+                dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                dialog.show();
             }
         });
 
