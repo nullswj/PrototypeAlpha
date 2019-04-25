@@ -33,10 +33,7 @@ public class AddLocActivity extends AppCompatActivity implements OnItemClickList
 
     private WebView webView;
 
-    String mUrl = "http://apis.map.qq.com/tools/locpicker?search=1&type=0&backurl=https://callback&key=FYWBZ-I5R3I-IJGGH-5CDPA-Q4RBO-WXFCD &referer=zhifa ";
-
-
-
+    String mUrl = "https://apis.map.qq.com/tools/locpicker?search=1&type=0&backurl=https2://callback&key=QULBZ-6M6KO-5YZWR-SEYTJ-GNNS5-O6B3L&referer=myapp";
 
     private Toolbar tlb_checkloc;
 
@@ -61,7 +58,6 @@ public class AddLocActivity extends AppCompatActivity implements OnItemClickList
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
