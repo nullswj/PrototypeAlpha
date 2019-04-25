@@ -16,15 +16,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.bumptech.glide.load.engine.Resource;
 import com.swj.prototypealpha.R;
-import com.swj.prototypealpha.swj.util.ItemRemoveRecyclerView;
 import com.swj.prototypealpha.swj.util.OnItemClickListener;
 import com.swj.prototypealpha.swj.util.SignItemRecyclerView;
 import com.venusic.handwrite.view.HandWriteView;
 
 import java.util.ArrayList;
-import java.util.BitSet;
 import java.util.List;
 import java.util.Random;
 
@@ -33,7 +30,8 @@ import static com.swj.prototypealpha.swj.WordFragment.text_word_foundation;
 import static com.swj.prototypealpha.swj.WordFragment.text_word_record;
 
 
-public class LookupFragment extends Fragment {
+public class LookupFragment extends Fragment
+{
     FloatingActionButton fabtn_lookup;
     HandWriteView handWriteView;
 
@@ -61,7 +59,8 @@ public class LookupFragment extends Fragment {
     }
 
     @Override
-    public void onHiddenChanged(boolean hidden) {
+    public void onHiddenChanged(boolean hidden)
+    {
         super.onHiddenChanged(hidden);
         if (pictureList == null ||text_word_record == null || text_word_foundation == null)
             return;
