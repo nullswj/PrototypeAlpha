@@ -97,7 +97,6 @@ public class AddLocActivity extends AppCompatActivity implements OnItemClickList
                         String lng = split[1];//经度
                         String address = uri.getQueryParameter("addr");//地址
 
-
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     }

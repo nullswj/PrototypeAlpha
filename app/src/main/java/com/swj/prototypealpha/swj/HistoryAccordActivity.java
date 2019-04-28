@@ -64,13 +64,13 @@ public class HistoryAccordActivity extends AppCompatActivity implements View.OnC
         itemList.clear();
         Bitmap leftImage = BitmapFactory.decodeResource(getResources(),R.mipmap.detail);
         Bitmap rightArrow = BitmapFactory.decodeResource(getResources(),R.mipmap.right_arrow);
-        ItemBean item0 = new ItemBean("2019.02.27","橘子洲大桥提质改造工程",leftImage,rightArrow);
-        ItemBean item1 = new ItemBean("2019.01.03","岳麓区",leftImage,rightArrow);
-        ItemBean item3 = new ItemBean("2018.11.29","2018.09",leftImage,rightArrow);
-        ItemBean item2 = new ItemBean("2018.11.16","长沙市工务局",leftImage,rightArrow);
-        ItemBean item6 = new ItemBean("2018.11.13","湖南省绿林市政景观工程有限公司",leftImage,rightArrow);
-        ItemBean item4 = new ItemBean("2018.10.18","城规监理",leftImage,rightArrow);
-        ItemBean item5 = new ItemBean("2018.08.31","已完成20个站点土建工程，7个站点钢结构施工",leftImage,rightArrow);
+        ItemBean item0 = new ItemBean("2019.02.27","跟踪复查，对建设方、施工方因未取得施工许可擅自施工下达了《责令改正通知书》各1份",leftImage,rightArrow);
+        ItemBean item1 = new ItemBean("2019.01.03","执法服务",leftImage,rightArrow);
+        ItemBean item3 = new ItemBean("2018.11.29","收到质安介入延期至2019年2月24日",leftImage,rightArrow);
+        ItemBean item2 = new ItemBean("2018.11.16","跟踪复查；督促责任主体办理质安介入延期",leftImage,rightArrow);
+        ItemBean item6 = new ItemBean("2018.11.13","跟踪复查，督促责任主体及时办理质安介入延期",leftImage,rightArrow);
+        ItemBean item4 = new ItemBean("2018.10.18","跟踪复查",leftImage,rightArrow);
+        ItemBean item5 = new ItemBean("2018.08.31","执法检查",leftImage,rightArrow);
 
         itemList.add(item0);
         adapter.notifyItemChanged(0);
