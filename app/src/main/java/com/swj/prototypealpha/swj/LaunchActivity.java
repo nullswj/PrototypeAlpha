@@ -7,8 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.swj.prototypealpha.R;
 import com.swj.prototypealpha.swj.util.ItemBean;
@@ -27,6 +29,38 @@ public class LaunchActivity extends AppCompatActivity implements OnItemClickList
     private ItemAdapter adapter;
 
     private List<ItemBean> itemList = new ArrayList<>();
+
+    /**
+     * 搜索view
+     */
+    private SearchView searchView;
+
+    /**
+     * 初始化视图
+     */
+    private void initViews() {
+        searchView = (SearchView) findViewById(R.id.searchView);
+        searchView.setQueryHint("查询通知");
+        searchView.setIconified(true);
+        searchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchView.setIconified(false);
+            }
+        });
+        searchView.setOnQueryTextListener(new android.support.v7.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
+    }
 
     private void initUI()
     {
@@ -53,6 +87,8 @@ public class LaunchActivity extends AppCompatActivity implements OnItemClickList
         recvv_launch.setAdapter(adapter);
         adapter.setItemClickListener(this);
         Update();
+
+        initViews();
 
     }
 

@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.swj.prototypealpha"
-        minSdkVersion 25
+        minSdkVersion 24
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -53,6 +53,8 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
 
     implementation 'com.github.venusic:E-signature:0.2'
+    implementation 'com.tencent.map:tencent-map-vector-sdk:latest.release'
+    implementation files('libs\\TencentMapSDK_Raster_v_1.3.2.jar')
 
 
 }

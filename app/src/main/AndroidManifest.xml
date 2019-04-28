@@ -3,6 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.swj.prototypealpha">
 
+    <!--腾讯地图 SDK 要求的权限(开始)-->
+    <!--访问网络获取地图服务-->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!--检查网络可用性-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <!-- 访问WiFi状态 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!--需要外部存储写权限用于保存地图缓存-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <!--获取 device id 辨别设备-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <!--腾讯地图 SDK 要求的权限(结束)-->
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -12,22 +25,26 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.PhoneNumberLoginActivity"/>
-        <activity android:name=".swj.TakePhotoActivity" />
-        <activity android:name=".activity.PolicyinfoActivity" />
-        <activity android:name=".activity.PolicyLableActivity" />
-        <activity android:name=".swj.ProjectInfoActivity" />
-        <activity android:name=".swj.ProjectListActivity" />
-        <activity android:name=".swj.HistoryAccordActivity" />
-        <activity android:name=".swj.CheckPerson" />
-        <activity android:name=".swj.AddLocActivity" />
-        <activity android:name=".swj.StartActivity" />
-        <activity android:name=".swj.LaunchActivity" />
-        <activity android:name=".activity.LoginActivity" />
-        <activity android:name=".activity.NoticeInfoActivity" />
-        <activity android:name=".activity.NoticeListActivity" />
-        <activity android:name=".activity.NoticeResultListActivity" />
-        <activity android:name=".activity.WelcomeActivity">
+        <meta-data
+            android:name="TencentMapSDK"
+            android:value="FYWBZ-I5R3I-IJGGH-5CDPA-Q4RBO-WXFCD"/>
+
+        <activity android:name=".activity.PhoneNumberLoginActivity" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".swj.TakePhotoActivity" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".activity.PolicyinfoActivity" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".activity.PolicyLableActivity" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".swj.ProjectInfoActivity" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".swj.ProjectListActivity" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".swj.HistoryAccordActivity" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".swj.CheckPerson" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".swj.AddLocActivity" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".swj.StartActivity" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".swj.LaunchActivity" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".activity.LoginActivity" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".activity.NoticeInfoActivity" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".activity.NoticeListActivity" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".activity.NoticeResultListActivity" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".activity.WelcomeActivity" android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,7 +53,8 @@
         </activity>
         <activity
             android:name=".activity.MainActivity"
-            android:label="@string/title_activity_main" />
+            android:label="@string/title_activity_main"
+            android:windowSoftInputMode="adjustPan"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"

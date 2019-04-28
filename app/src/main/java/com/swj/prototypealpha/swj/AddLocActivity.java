@@ -3,6 +3,7 @@ package com.swj.prototypealpha.swj;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import com.swj.prototypealpha.R;
@@ -19,11 +23,17 @@ import com.swj.prototypealpha.swj.util.OnItemClickListener;
 import com.swj.prototypealpha.swj.util.RecyclerViewHelper.ItemAdapter;
 import com.swj.prototypealpha.swj.util.SpinnerAdapter;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AddLocActivity extends AppCompatActivity implements OnItemClickListener
 {
+
+    private WebView webView;
+
+    String mUrl = "https://apis.map.qq.com/tools/locpicker?search=1&type=0&backurl=https2://callback&key=QULBZ-6M6KO-5YZWR-SEYTJ-GNNS5-O6B3L&referer=myapp";
 
     private Toolbar tlb_checkloc;
 
@@ -37,19 +47,17 @@ public class AddLocActivity extends AppCompatActivity implements OnItemClickList
 
     private FloatingActionButton btn_addloc;
 
-
-
     private void initUI()
     {
         recvv_checkloc = findViewById(R.id.recv_addloc);
         tlb_checkloc = findViewById(R.id.tlb_checkloc);
         btn_addloc = findViewById(R.id.lfbtn_add_loc);
         text_takephoto = findViewById(R.id.text_loc_takephoto);
+        webView = findViewById(R.id.webView);
         setSupportActionBar(tlb_checkloc);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +65,47 @@ public class AddLocActivity extends AppCompatActivity implements OnItemClickList
         setContentView(R.layout.activity_add_loc);
 
         initUI();
+        WebSettings settings = webView.getSettings();
+        settings.setRenderPriority(WebSettings.RenderPriority.HIGH);
+        settings.setSupportMultipleWindows(true);
+        settings.setJavaScriptEnabled(true);
+        settings.setSavePassword(false);
+        settings.setJavaScriptCanOpenWindowsAutomatically(true);
+        settings.setMinimumFontSize(settings.getMinimumFontSize() + 8);
+        settings.setAllowFileAccess(false);
+        settings.setTextSize(WebSettings.TextSize.NORMAL);
+        webView.setVerticalScrollbarOverlay(true);
+        webView.setWebViewClient(new WebViewClient()
+        {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url)
+            {
+                if (!url.startsWith("https://callback")) {
+                    view.loadUrl(url);
+                }
+                else {
+                    try {
+
+                        //转utf-8编码
+                        String decode = URLDecoder.decode(url, "UTF-8");
+
+                        //转uri，然后根据key取值
+                        Uri uri = Uri.parse(decode);
+                        String latng = uri.getQueryParameter("latng");//纬度在前，经度在后，以逗号分隔
+                        String[] split = latng.split(",");
+                        String lat = split[0];//纬度
+                        String lng = split[1];//经度
+                        String address = uri.getQueryParameter("addr");//地址
+
+
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                }
+                return true;
+            }
+        });
+        webView.loadUrl(mUrl);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recvv_checkloc.setLayoutManager(layoutManager);
