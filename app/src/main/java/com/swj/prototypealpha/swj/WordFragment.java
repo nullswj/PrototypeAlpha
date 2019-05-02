@@ -33,7 +33,10 @@ public class WordFragment extends Fragment {
         text_word_record = getActivity().findViewById(R.id.word_question_record_lable);
 
         edit_word_foundation = getActivity().findViewById(R.id.word_doundation_edit);
+        edit_word_foundation.setText("现场情况符合要求");
         edit_word_question = getActivity().findViewById(R.id.word_question_record_edit);
+        edit_word_question.setText("要求1：XXXXXXXXXXXXXXXXXXXX" +"\n"+
+                "要求2：XXXXXXXXXXXXXXXXX");
 
         fab_record_submit = getActivity().findViewById(R.id.flb_word_question_record_submit);
         fab_foundation_submit = getActivity().findViewById(R.id.flb_word_foundation_submit);

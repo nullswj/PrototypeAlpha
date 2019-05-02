@@ -39,6 +39,7 @@
             android:inputType="text"
             android:textColor="@color/txt_color"
             android:textSize="12sp"
+            android:maxLines="20"
             app:layout_constraintEnd_toStartOf="@+id/flb_word_foundation_submit"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/word_foundation_lable" />
@@ -71,6 +72,7 @@
             android:inputType="textPersonName"
             android:textColor="@color/txt_color"
             android:textSize="12sp"
+            android:maxLines="20"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline38"
             app:layout_constraintStart_toStartOf="parent"

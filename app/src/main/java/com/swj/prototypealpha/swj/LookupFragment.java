@@ -1,7 +1,6 @@
 package com.swj.prototypealpha.swj;
 
 import android.content.DialogInterface;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -21,7 +20,9 @@ import com.swj.prototypealpha.swj.util.OnItemClickListener;
 import com.swj.prototypealpha.swj.util.SignItemRecyclerView;
 import com.venusic.handwrite.view.HandWriteView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -38,6 +39,16 @@ public class LookupFragment extends Fragment
     RecyclerView recv_photo;
 
     private SignItemRecyclerView recv_sign;
+
+    TextView text_look_proj;
+
+    TextView text_look_time;
+
+    TextView text_look_addr;
+
+    TextView text_bulid;
+
+    TextView text_check;
 
     TextView text_look_foundation;
 
@@ -96,6 +107,22 @@ public class LookupFragment extends Fragment
         handWriteView = getActivity().findViewById(R.id.handw_view);
         text_look_foundation = getActivity().findViewById(R.id.text_look_foundation);
         text_look_rocord = getActivity().findViewById(R.id.text_lookup_record);
+
+        text_bulid = getActivity().findViewById(R.id.text_buildeproj);
+        text_bulid.setText("长沙市工务局");
+        text_check = getActivity().findViewById(R.id.text_checkproj);
+        text_check.setText("城规监理");
+        text_look_addr = getActivity().findViewById(R.id.text_addrproj);
+        text_look_addr.setText("岳麓区");
+
+        text_look_time = getActivity().findViewById(R.id.text_currenttime4);
+
+        Date newTime = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        text_look_time.setText(sdf.format(newTime));
+
+        text_look_proj = getActivity().findViewById(R.id.text_projchenck);
+        text_look_proj.setText("橘子洲大桥提质改造工程");
 
         recv_photo = getActivity().findViewById(R.id.recv_lookup_picture);
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(),2);
