@@ -15,7 +15,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,77 +34,100 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 import static android.app.Activity.RESULT_FIRST_USER;
 
 
 public class PictureFragment extends Fragment {
 
-    private final String TAG = "PictureFragment";
+    public static final int                    TAKE_PHOTO  = 1;
+    public static       Uri                    imageUri;
+    public static       ImageAdapter           adapter;
+    public static       List<List<Picture>>    pictureList = new ArrayList<>();
+    private final       String                 TAG         = "PictureFragment";
+    private             FloatingActionButton   fabtn_picture;
+    private             ItemRemoveRecyclerView recv_photo;
+    private             File                   outputImage;
+    private             int                    itemPosition;
 
-    private FloatingActionButton fabtn_picture;
+    /**
+     * 将图片按照某个角度进行旋转
+     *
+     * @param bm     需要旋转的图片
+     * @param degree 旋转角度
+     * @return 旋转后的图片
+     */
+    public static Bitmap rotateBitmapByDegree (Bitmap bm, int degree) {
+        Bitmap returnBm = null;
 
-    private ItemRemoveRecyclerView recv_photo;
-
-    public static final int TAKE_PHOTO = 1;
-
-    public static Uri imageUri;
-
-    private File outputImage;
-
-    public static ImageAdapter adapter;
-
-    public static List<Picture> pictureList = new ArrayList<>();
-
+        // 根据旋转角度，生成旋转矩阵
+        Matrix matrix = new Matrix();
+        matrix.postRotate(degree);
+        try {
+            // 将原始图片按照旋转矩阵进行旋转，并得到新的图片
+            returnBm = Bitmap.createBitmap(bm, 0, 0, bm.getWidth(), bm.getHeight(), matrix, true);
+        } catch (OutOfMemoryError e) {
+        }
+        if (returnBm == null) {
+            returnBm = bm;
+        }
+        if (bm != returnBm) {
+            bm.recycle();
+        }
+        return returnBm;
+    }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView (LayoutInflater inflater, ViewGroup container,
+                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        List<Picture> pictures=new ArrayList<>();
+        pictureList.add(pictures);
         return inflater.inflate(R.layout.fragment_picture, container, false);
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    public void onActivityCreated (@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         fabtn_picture = getActivity().findViewById(R.id.fabtn_takephoto);
 
         fabtn_picture.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick (View v) {
                 takePhoto();
             }
         });
-        recv_photo = getActivity().findViewById(R.id.recv_photo);
-        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(),2);
-        recv_photo.setLayoutManager(layoutManager);
-        adapter = new ImageAdapter(pictureList);
 
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recv_photo = getActivity().findViewById(R.id.recv_photo);
+        //        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(),2);
+        //        recv_photo.setLayoutManager(layoutManager);
+        recv_photo.setLayoutManager(linearLayoutManager);
+        adapter = new ImageAdapter(getContext(), pictureList, null);
         recv_photo.setAdapter(adapter);
 
         recv_photo.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(int position) {
+            public void onItemClick (int position) {
 
             }
 
             @Override
-            public void onDeleteClick(int position)
-            {
+            public void onDeleteClick (int position) {
                 final int pos = position;
                 AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
                 dialog.setTitle("照片");
                 dialog.setMessage("确认删除吗？");
                 dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick (DialogInterface dialog, int which) {
                         adapter.removeItem(pos);
                     }
                 });
                 dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick (DialogInterface dialog, int which) {
 
                     }
                 });
@@ -117,11 +140,12 @@ public class PictureFragment extends Fragment {
 
     /**
      * 读取图片的旋转的角度
-     *
+     * <p>
      * 图片绝对路径
+     *
      * @return 图片的旋转角度
      */
-    private int getBitmapDegree() {
+    private int getBitmapDegree () {
         int degree = 0;
         try {
             InputStream inputStream = new FileInputStream(outputImage);
@@ -147,102 +171,59 @@ public class PictureFragment extends Fragment {
         return degree;
     }
 
-    /**
-     * 将图片按照某个角度进行旋转
-     *
-     * @param bm
-     * 需要旋转的图片
-     * @param degree
-     * 旋转角度
-     * @return 旋转后的图片
-     */
-    public static Bitmap rotateBitmapByDegree(Bitmap bm, int degree) {
-        Bitmap returnBm = null;
-
-        // 根据旋转角度，生成旋转矩阵
-        Matrix matrix = new Matrix();
-        matrix.postRotate(degree);
-        try
-        {
-            // 将原始图片按照旋转矩阵进行旋转，并得到新的图片
-            returnBm = Bitmap.createBitmap(bm, 0, 0, bm.getWidth(), bm.getHeight(), matrix, true);
-        }
-        catch (OutOfMemoryError e) {
-        }
-        if (returnBm == null) {
-            returnBm = bm;
-        }
-        if (bm != returnBm) {
-            bm.recycle();
-        }
-        return returnBm;
-    }
-
-
-
-
-    private void takePhoto()
-    {
+    private void takePhoto () {
         Date date = new Date(System.currentTimeMillis());
         SimpleDateFormat dateFormat = new SimpleDateFormat("'IMG'_yyyyMMdd_HHmmss");
 
-        String filename = dateFormat.format(date)+".jpg";
-        outputImage = new File(getActivity().getExternalCacheDir(),filename);
-        try
-        {
-            if(outputImage.exists())
+        String filename = dateFormat.format(date) + ".jpg";
+        outputImage = new File(getActivity().getExternalCacheDir(), filename);
+        try {
+            if (outputImage.exists())
                 outputImage.delete();
             outputImage.createNewFile();
-        }
-        catch (IOException e)
-        {
-            Log.e(TAG, "takephoto: "+ "IO异常");
+        } catch (IOException e) {
+            Log.e(TAG, "takephoto: " + "IO异常");
             e.printStackTrace();
         }
-        if(Build.VERSION.SDK_INT >= 24)
-            imageUri = FileProvider.getUriForFile(getActivity(),"com.swj.prototypealpha.fileprovider",outputImage);
+        if (Build.VERSION.SDK_INT >= 24)
+            imageUri = FileProvider.getUriForFile(getActivity(), "com.swj.prototypealpha" +
+                    ".fileprovider", outputImage);
         else
             imageUri = Uri.fromFile(outputImage);
 
-        Intent intent =  new Intent("android.media.action.IMAGE_CAPTURE");
-        intent.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
-        startActivityForResult(intent,TAKE_PHOTO);
+        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+        startActivityForResult(intent, TAKE_PHOTO);
 
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-        switch (requestCode)
-        {
+    public void onActivityResult (int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
             case TAKE_PHOTO:
-                if(requestCode == RESULT_FIRST_USER)
-                {
-                    try
-                    {
-                        Bitmap bitmap = BitmapFactory.decodeStream(getActivity().getContentResolver().openInputStream(imageUri));
-                        switch (getBitmapDegree())
-                        {
+                if (requestCode == RESULT_FIRST_USER) {
+                    try {
+                        Bitmap bitmap =
+                                BitmapFactory.decodeStream(getActivity().getContentResolver().openInputStream(imageUri));
+                        switch (getBitmapDegree()) {
                             case 90:
-                                bitmap = rotateBitmapByDegree(bitmap,90);
+                                bitmap = rotateBitmapByDegree(bitmap, 90);
                                 break;
                             case 180:
-                                bitmap = rotateBitmapByDegree(bitmap,180);
+                                bitmap = rotateBitmapByDegree(bitmap, 180);
                                 break;
                             case 270:
-                                bitmap = rotateBitmapByDegree(bitmap,270);
+                                bitmap = rotateBitmapByDegree(bitmap, 270);
                                 break;
                             default:
                                 break;
                         }
                         Picture picture = new Picture(bitmap);
-                        pictureList.add(picture);
+                        pictureList.get(0).add(picture);
                         int len = pictureList.size();
-                        adapter.notifyItemChanged(len-1);
-                        adapter.notifyItemChanged(0,len);
-                    }
-                    catch (FileNotFoundException e)
-                    {
+                        adapter.notifyItemChanged(len - 1);
+                        adapter.notifyItemChanged(0, len);
+                    } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
                 }

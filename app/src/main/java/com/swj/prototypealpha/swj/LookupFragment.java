@@ -31,49 +31,35 @@ import static com.swj.prototypealpha.swj.WordFragment.text_word_foundation;
 import static com.swj.prototypealpha.swj.WordFragment.text_word_record;
 
 
-public class LookupFragment extends Fragment
-{
+public class LookupFragment extends Fragment {
+    public static ImageAdapter  adapter;
+    public static SignAdapter   signadapter;
+    public static List<Picture> signList    = new ArrayList<>();
+    public static List<Bitmap>  signbitmaps = new ArrayList<>();
+    public static List<String>  urlList     = new ArrayList<>();
+
     FloatingActionButton fabtn_lookup;
-    HandWriteView handWriteView;
-
-    RecyclerView recv_photo;
-
+    HandWriteView        handWriteView;
+    RecyclerView         recv_photo;
+    TextView             text_look_proj;
+    TextView             text_look_time;
+    TextView             text_look_addr;
+    TextView             text_bulid;
+    TextView             text_check;
+    TextView             text_look_foundation;
+    TextView             text_look_rocord;
     private SignItemRecyclerView recv_sign;
 
-    TextView text_look_proj;
-
-    TextView text_look_time;
-
-    TextView text_look_addr;
-
-    TextView text_bulid;
-
-    TextView text_check;
-
-    TextView text_look_foundation;
-
-    TextView text_look_rocord;
-
-    public static ImageAdapter adapter;
-
-    public static SignAdapter signadapter;
-
-    public static List<Picture> signList = new ArrayList<>();
-
-    public static List<Bitmap> signbitmaps = new ArrayList<>();
-
-    private void setBitmap()
-    {
-        signbitmaps.add(BitmapFactory.decodeResource(getResources(),R.mipmap.sign1));
-        signbitmaps.add(BitmapFactory.decodeResource(getResources(),R.mipmap.sign2));
-        signbitmaps.add(BitmapFactory.decodeResource(getResources(),R.mipmap.sign3));
+    private void setBitmap () {
+        signbitmaps.add(BitmapFactory.decodeResource(getResources(), R.mipmap.sign1));
+        signbitmaps.add(BitmapFactory.decodeResource(getResources(), R.mipmap.sign2));
+        signbitmaps.add(BitmapFactory.decodeResource(getResources(), R.mipmap.sign3));
     }
 
     @Override
-    public void onHiddenChanged(boolean hidden)
-    {
+    public void onHiddenChanged (boolean hidden) {
         super.onHiddenChanged(hidden);
-        if (pictureList == null ||text_word_record == null || text_word_foundation == null)
+        if (pictureList == null || text_word_record == null || text_word_foundation == null)
             return;
 
         String foundation = text_word_foundation.getText().toString();
@@ -82,25 +68,24 @@ public class LookupFragment extends Fragment
         String record = text_word_record.getText().toString();
         text_look_rocord.setText(record);
 
-        if (adapter == null)
-        {
-            adapter = new ImageAdapter(pictureList);
+        if (adapter == null) {
+            adapter = new ImageAdapter(getContext(), pictureList, null);
             recv_photo.setAdapter(adapter);
         }
         int len = pictureList.size();
-        adapter.notifyItemChanged(0,len);
+        adapter.notifyItemChanged(0, len);
     }
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView (LayoutInflater inflater, ViewGroup container,
+                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_lookup, container, false);
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    public void onActivityCreated (@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setBitmap();
         fabtn_lookup = getActivity().findViewById(R.id.fabtn_clear);
@@ -125,11 +110,11 @@ public class LookupFragment extends Fragment
         text_look_proj.setText("橘子洲大桥提质改造工程");
 
         recv_photo = getActivity().findViewById(R.id.recv_lookup_picture);
-        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(),2);
+        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
         recv_photo.setLayoutManager(layoutManager);
 
         recv_sign = getActivity().findViewById(R.id.recv_lookup_sign);
-        GridLayoutManager signManager = new GridLayoutManager(getActivity(),2);
+        GridLayoutManager signManager = new GridLayoutManager(getActivity(), 2);
         recv_sign.setLayoutManager(signManager);
 
         signadapter = new SignAdapter(signList);
@@ -138,25 +123,25 @@ public class LookupFragment extends Fragment
 
         recv_sign.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(int position) {
+            public void onItemClick (int position) {
 
             }
 
             @Override
-            public void onDeleteClick(int position) {
+            public void onDeleteClick (int position) {
                 final int pos = position;
                 AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
                 dialog.setTitle("照片");
                 dialog.setMessage("确认删除吗？");
                 dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick (DialogInterface dialog, int which) {
                         signadapter.removeItem(pos);
                     }
                 });
                 dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick (DialogInterface dialog, int which) {
 
                     }
                 });
@@ -166,15 +151,15 @@ public class LookupFragment extends Fragment
 
         fabtn_lookup.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick (View v) {
                 handWriteView.clear();
 
                 Random random = new Random();
                 Picture picture = new Picture(signbitmaps.get(random.nextInt(2)));
                 signList.add(picture);
                 int len = pictureList.size();
-                signadapter.notifyItemChanged(len-1);
-                signadapter.notifyItemChanged(0,len);
+                signadapter.notifyItemChanged(len - 1);
+                signadapter.notifyItemChanged(0, len);
             }
         });
     }
