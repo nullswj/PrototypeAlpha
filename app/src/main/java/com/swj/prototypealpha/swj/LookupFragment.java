@@ -50,10 +50,39 @@ public class LookupFragment extends Fragment {
     TextView             text_look_rocord;
     private SignItemRecyclerView recv_sign;
 
-    private void setBitmap () {
-        signbitmaps.add(BitmapFactory.decodeResource(getResources(), R.mipmap.sign1));
-        signbitmaps.add(BitmapFactory.decodeResource(getResources(), R.mipmap.sign2));
-        signbitmaps.add(BitmapFactory.decodeResource(getResources(), R.mipmap.sign3));
+    TextView text_look_proj;
+
+    TextView text_look_time;
+
+    TextView text_look_addr;
+
+    TextView text_bulid;
+
+    TextView text_check;
+
+    TextView text_checkpeople;
+
+    TextView text_writepeople;
+
+    TextView text_donepeople;
+
+    TextView text_look_foundation;
+
+    TextView text_look_rocord;
+
+    public static ImageAdapter adapter;
+
+    public static SignAdapter signadapter;
+
+    public static List<Picture> signList = new ArrayList<>();
+
+    public static List<Bitmap> signbitmaps = new ArrayList<>();
+
+    private void setBitmap()
+    {
+        signbitmaps.add(BitmapFactory.decodeResource(getResources(),R.mipmap.sign1));
+        signbitmaps.add(BitmapFactory.decodeResource(getResources(),R.mipmap.sign2));
+        signbitmaps.add(BitmapFactory.decodeResource(getResources(),R.mipmap.sign3));
     }
 
     @Override
@@ -98,7 +127,7 @@ public class LookupFragment extends Fragment {
         text_check = getActivity().findViewById(R.id.text_checkproj);
         text_check.setText("城规监理");
         text_look_addr = getActivity().findViewById(R.id.text_addrproj);
-        text_look_addr.setText("岳麓区");
+        text_look_addr.setText("岳麓区XX街道XX路");
 
         text_look_time = getActivity().findViewById(R.id.text_currenttime4);
 
@@ -108,6 +137,15 @@ public class LookupFragment extends Fragment {
 
         text_look_proj = getActivity().findViewById(R.id.text_projchenck);
         text_look_proj.setText("橘子洲大桥提质改造工程");
+
+        text_checkpeople = getActivity().findViewById(R.id.text_checkpeople);
+        text_checkpeople.setText("张三");
+
+        text_writepeople = getActivity().findViewById(R.id.text_writepeople);
+        text_writepeople.setText("李四");
+
+        text_donepeople = getActivity().findViewById(R.id.text_donepeople);
+        text_donepeople.setText("王五");
 
         recv_photo = getActivity().findViewById(R.id.recv_lookup_picture);
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);

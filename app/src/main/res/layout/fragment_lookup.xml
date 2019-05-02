@@ -12,6 +12,98 @@
         tools:layout_editor_absoluteY="8dp">
 
         <TextView
+            android:id="@+id/text_writepeople"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="8dp"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/textView_bedonepeople"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_writepeople" />
+
+        <TextView
+            android:id="@+id/text_checkpeople"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="8dp"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/textView_writepeople"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_checkpeople" />
+
+        <TextView
+            android:id="@+id/text_donepeople"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/textView_buildproj"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_bedonepeople" />
+
+        <TextView
+            android:id="@+id/textView_bedonepeople"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="被检查人"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/text_donepeople"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.045"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_writepeople" />
+
+        <TextView
+            android:id="@+id/textView_checkpeople"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="检查人"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/text_checkpeople"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.043"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_currenttime4" />
+
+        <TextView
+            android:id="@+id/textView_writepeople"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="记录人"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/text_writepeople"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.043"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_checkpeople" />
+
+        <TextView
             android:id="@+id/text_checkproj"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -33,9 +125,9 @@
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="8dp"
             android:textSize="12sp"
-            app:layout_constraintBottom_toTopOf="@+id/textView_buildproj"
+            app:layout_constraintBottom_toTopOf="@+id/textView_checkpeople"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.9"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView_time" />
 
@@ -52,9 +144,9 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/text_buildeproj"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.048"
+            app:layout_constraintHorizontal_bias="0.045"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_currenttime4" />
+            app:layout_constraintTop_toBottomOf="@+id/text_donepeople" />
 
         <TextView
             android:id="@+id/textView_jianduproj"
@@ -108,7 +200,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="项目地址"
+            android:text="检查地点"
             android:textColor="@android:color/black"
             android:textSize="14sp"
             android:textStyle="bold"
@@ -125,7 +217,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:text="执法项目"
+            android:text="检查项目"
             android:textColor="@android:color/black"
             android:textSize="14sp"
             android:textStyle="bold"
@@ -145,7 +237,7 @@
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@+id/textView_jianduproj"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView_buildproj" />
 
@@ -156,7 +248,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="执法时间"
+            android:text="检查时间"
             android:textColor="@android:color/black"
             android:textSize="14sp"
             android:textStyle="bold"
