@@ -2,26 +2,39 @@ package com.swj.prototypealpha.swj.util.RecyclerViewHelper;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.swj.prototypealpha.Enity.NoticeEntity;
 import com.swj.prototypealpha.R;
 import com.swj.prototypealpha.activity.NoticeInfoActivity;
-
+import java.util.ArrayList;
 import java.util.List;
 
-import static android.support.v4.content.ContextCompat.startActivity;
-
-public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder> {
+public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder> implements Filterable {
 
     private List<NoticeEntity> mnotice ;
+    private List<NoticeEntity> old_notice ;
     public NoticeAdapter(List<NoticeEntity> mData) {
         mnotice = mData;
+        old_notice = mData;
     }
+    private MyFilter mFilter;
+
+    @Override
+    public Filter getFilter() {
+        if (null == mFilter) {
+            mFilter = new MyFilter();
+        }
+        return mFilter;
+    }
+
 
     static class ViewHolder extends RecyclerView.ViewHolder{
         View view;
@@ -49,7 +62,7 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
                 NoticeEntity noticeEntity = mnotice.get(position);
-                Toast.makeText(view.getContext(),"监听到点击",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(view.getContext(),"监听到点击",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(view.getContext(), NoticeInfoActivity.class);
                 intent.putExtra("noticeinfo",noticeEntity);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -75,4 +88,39 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
     public int getItemCount() {
         return mnotice.size();
     }
+    public  class MyFilter extends Filter {
+
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults results = new FilterResults();
+            List<NoticeEntity> newValues = new ArrayList<NoticeEntity>();
+            String filterString = constraint.toString().trim();
+
+            if (TextUtils.isEmpty(filterString)) {
+                newValues = mnotice;
+            } else {
+                for (NoticeEntity str : mnotice) {
+                    if (str.getTitle().contains(filterString)) {
+                        newValues.add(str);
+                    }
+                }
+            }
+
+            results.values = newValues;
+            results.count = newValues.size();
+
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            old_notice = (ArrayList<NoticeEntity>) results.values;
+            if (results.count > 0) {
+                notifyDataSetChanged();
+            } else {
+                NoticeAdapter.this.notify();
+            }
+        }
+    }
+
 }

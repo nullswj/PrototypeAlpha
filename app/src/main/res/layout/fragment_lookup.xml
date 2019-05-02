@@ -77,7 +77,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="问题记录"
+            android:text="执法措施及要求"
             android:textColor="@android:color/black"
             android:textSize="14sp"
             android:textStyle="bold"
