@@ -127,9 +127,11 @@ public class NoticeListActivity extends AppCompatActivity {
 
             NoticeEntity mnoticeEntity = old_Data.get(position);
             TextView text  = view.findViewById(R.id.tv_content);
-            text.setText(mnoticeEntity.getText());
+            text.setText(mnoticeEntity.getFromer());
             TextView title = view.findViewById(R.id.tv_titlenotice);
             title.setText(mnoticeEntity.getTitle());
+            TextView time = view.findViewById(R.id.textView_time_notice);
+            time.setText(mnoticeEntity.getTime());
             return view;
         }
 
@@ -182,7 +184,7 @@ public class NoticeListActivity extends AppCompatActivity {
 
     public List<NoticeEntity> generateData(int size) {
             ArrayList<NoticeEntity> noticeEntities = new ArrayList<NoticeEntity>();
-            noticeEntities.add(new NoticeEntity("关于公布全市房产新政咨询电话的公告", "2017-10-16 00:00", "市住建委", "市住建委", "  为方便广大市民咨询有关房地产市场管理政策，现将全市房产新政咨询电话公告如下：\n" +
+            noticeEntities.add(new NoticeEntity("关于公布全市房产新政咨询电话的公告", "2017-10-16 00:00", "发布人：市住建委", "稿件来源：市住建委", "  为方便广大市民咨询有关房地产市场管理政策，现将全市房产新政咨询电话公告如下：\n" +
                     "\n" +
                     "一、市房产交易管理中心信息科咨询电话：84662152。地址：芙蓉区马王堆中路248号。\n" +
                     "\n" +
@@ -191,7 +193,7 @@ public class NoticeListActivity extends AppCompatActivity {
                     "三、驻市不动产登记中心大楼政务窗口新政咨询电话：84529160。地址：芙蓉区晚报大道150号。\n" +
                     "\n" +
                     "四、驻河西市政务中心窗口房产新政咨询电话：88665171。地址：岳麓区岳麓大道218号市政府二办政务大厅\n"));
-            noticeEntities.add(new NoticeEntity("住房城乡建设领域涉黑涉恶线索举报平台", "时间：2019-03-25 16:32", "发布人：市住建委 ", "稿件来源：市住建局信访处", "一、举报须知。\n" +
+            noticeEntities.add(new NoticeEntity("住房城乡建设领域涉黑涉恶线索举报平台", "2019-03-25 16:32", "发布人：市住建委 ", "稿件来源：市住建局信访处", "一、举报须知。\n" +
                     "\n" +
                     "    为充分保护举报人的合法权益，并最大限度地发挥网站举报栏目的效能和作用，请您在提交举报信息前仔细阅读以下须知：\n" +
                     "\n" +

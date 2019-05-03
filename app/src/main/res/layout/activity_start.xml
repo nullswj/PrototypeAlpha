@@ -21,6 +21,7 @@
         android:id="@+id/mainTitle_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="项目信息"
         android:textColor="@android:color/white"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar_start"

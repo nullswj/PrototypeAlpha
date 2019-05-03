@@ -29,6 +29,8 @@ import java.util.Random;
 import static com.swj.prototypealpha.swj.PictureFragment.pictureList;
 import static com.swj.prototypealpha.swj.WordFragment.text_word_foundation;
 import static com.swj.prototypealpha.swj.WordFragment.text_word_record;
+import static com.swj.prototypealpha.swj.WordFragment.word_foundation;
+import static com.swj.prototypealpha.swj.WordFragment.word_question;
 
 
 public class LookupFragment extends Fragment {
@@ -66,9 +68,11 @@ public class LookupFragment extends Fragment {
 
         String foundation = text_word_foundation.getText().toString();
         text_look_foundation.setText(foundation);
+        text_look_foundation.setText(word_foundation);
 
         String record = text_word_record.getText().toString();
         text_look_rocord.setText(record);
+        text_look_rocord.setText(word_question);
 
         if (adapter == null) {
             adapter = new ImageAdapter(getContext(), pictureList, null);

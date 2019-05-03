@@ -63,6 +63,12 @@ public class PolicyLableActivity extends AppCompatActivity {
             }
         });
         mSearchView.setIconifiedByDefault(true);
+        mSearchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSearchView.setIconified(false);
+            }
+        });
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit (String s) {
@@ -94,7 +100,10 @@ public class PolicyLableActivity extends AppCompatActivity {
     }
 
     private void initData () {
-        policies.add(new String[]{"中华人民共和国水法", "2016.7.2"});
+        policies.add(new String[]{"中华人民共和国水法", "2016-07-02"});
+        policies.add(new String[]{"中华人民共和国行政强制法", "2011-06-30"});
+        policies.add(new String[]{"中华人民共和国城乡规划法", "2007-10-28"});
+        policies.add(new String[]{"中华人民共和国物权法", "2007-03-16"});
         old_filter_policies = policies;
     }
 
