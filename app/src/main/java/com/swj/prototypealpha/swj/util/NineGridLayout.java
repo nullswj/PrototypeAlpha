@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,80 +28,13 @@ import java.util.TimerTask;
  */
 public class NineGridLayout extends ViewGroup {
     private static final float DEFUALT_SPACING = 3f;
-
-    class MyGesture implements OnTouchListener, GestureDetector.OnGestureListener {
-
-        GestureDetector myGesture = new GestureDetector(getContext(),this);
-        private Picture picture;
-        public MyGesture (Picture url) {
-            picture=url;
-        }
-
-        @Override
-        public boolean onDown (MotionEvent e) {
-            return false;
-        }
-
-        @Override
-        public void onShowPress (MotionEvent e) {
-
-        }
-
-        @Override
-        public boolean onSingleTapUp (MotionEvent e) {
-            return false;
-        }
-
-        @Override
-        public boolean onScroll (MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-            return false;
-        }
-
-        @Override
-        public void onLongPress (MotionEvent e) {
-            System.out.println("sdfsafdsfgasfsadf");
-            AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
-            dialog.setTitle("照片");
-            dialog.setMessage("确认删除吗？");
-            dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick (DialogInterface dialog, int which) {
-                    pictures.remove(picture);
-                    notifyDataSetChanged();
-                }
-            });
-            dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick (DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
-            dialog.show();
-        }
-
-        @Override
-        public boolean onFling (MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            return false;
-        }
-
-        @Override
-        public boolean onTouch (View v, MotionEvent event) {
-            System.out.println("----------------------------");
-            myGesture.onTouchEvent(event);
-            return false;
-        }
-    }
     protected     Context                    mContext;
     private       float                      image_ratio     = 1.0f;//默认图片长宽比例
-    private       int                        oneImageWidth;//一张图的宽度
-    private       int                        oneImageHeight;//一张图的高度
     private       float                      mSpacing        = DEFUALT_SPACING;
     private       int                        mColumns;
     private       int                        mRows;
     private       int                        mTotalWidth;
     private       int                        mSingleWidth;
-    private       int                        itemPosition;
-    private       OnItemPictureClickListener listener;
     private       boolean                    mIsShowAll      = false;
     private       List<Picture>              pictures        = new ArrayList<>();
 
@@ -114,9 +46,6 @@ public class NineGridLayout extends ViewGroup {
         super(context, attrs);
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.NineGridLayout);
         mSpacing = typedArray.getDimension(R.styleable.NineGridLayout_sapcing, DEFUALT_SPACING);
-        oneImageWidth = (int) typedArray.getDimension(R.styleable.NineGridLayout_oneImageWidth, 0);
-        oneImageHeight = (int) typedArray.getDimension(R.styleable.NineGridLayout_oneImageHeight,
-                0);
         image_ratio = typedArray.getFloat(R.styleable.NineGridLayout_image_ratio, image_ratio);
         typedArray.recycle();
         init(context);
@@ -198,20 +127,32 @@ public class NineGridLayout extends ViewGroup {
     private RatioImageView createImageView (final int i, final Picture url) {
         final RatioImageView imageView = new RatioImageView(mContext);
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        //        imageView.setOnClickListener(new OnClickListener() {
-        //            @Override
-        //            public void onClick (View v) {
-        //                onClickAImage(i, url, pictures, imageView);
-        //            }
-        //
-        //            private void onClickAImage (int imageIndex, Picture url, List<Picture>
-        //            urlList,
-        //                                        ImageView imageView) {
-        //                listener.onItemPictureClick(itemPosition, imageIndex, url, urlList,
-        //                imageView);
-        //            }
-        //        });
-        imageView.setOnTouchListener(new MyGesture(url));
+        imageView.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch (View v, MotionEvent event) {
+                if(event.getAction()==MotionEvent.ACTION_DOWN){
+                    System.out.println("long click");
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+                    dialog.setTitle("照片");
+                    dialog.setMessage("确认删除吗？");
+                    dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick (DialogInterface dialog, int which) {
+                            pictures.remove(url);
+                            notifyDataSetChanged();
+                        }
+                    });
+                    dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick (DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    dialog.show();
+                }
+                return true;
+            }
+        });
         return imageView;
     }
 
@@ -233,15 +174,6 @@ public class NineGridLayout extends ViewGroup {
         addView(imageView);
         displayImage(num, imageView, url);
     }
-
-    public void setItemPosition (int itemPosition) {
-        this.itemPosition = itemPosition;
-    }
-
-    public void setListener (OnItemPictureClickListener listener) {
-        this.listener = listener;
-    }
-
     private void displayImage (int num, RatioImageView imageView, Picture url) {
         if (mContext != null) {
             imageView.setImageBitmap(url.getImageID());
