@@ -25,7 +25,7 @@ public class NoticeInfoActivity extends AppCompatActivity {
             TextView sender = findViewById(R.id.tv_noticeinfo_sender);
             TextView fromer = findViewById(R.id.tv_noticeinfo_fromer);
             TextView content = findViewById(R.id.tv_noticeinfo_context);
-            time.setText(entity.getTime());
+            time.setText("时间："+entity.getTime());
             title.setText(entity.getTitle());
             sender.setText(entity.getSender());
             fromer.setText(entity.getFromer());

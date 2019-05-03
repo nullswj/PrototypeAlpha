@@ -29,6 +29,8 @@ import java.util.Random;
 import static com.swj.prototypealpha.swj.PictureFragment.pictureList;
 import static com.swj.prototypealpha.swj.WordFragment.text_word_foundation;
 import static com.swj.prototypealpha.swj.WordFragment.text_word_record;
+import static com.swj.prototypealpha.swj.WordFragment.word_foundation;
+import static com.swj.prototypealpha.swj.WordFragment.word_question;
 
 
 public class LookupFragment extends Fragment {
@@ -48,35 +50,11 @@ public class LookupFragment extends Fragment {
     TextView             text_check;
     TextView             text_look_foundation;
     TextView             text_look_rocord;
+    TextView text_checkpeople;
+    TextView text_donepeople;
+    TextView text_writepeople;
     private SignItemRecyclerView recv_sign;
 
-    TextView text_look_proj;
-
-    TextView text_look_time;
-
-    TextView text_look_addr;
-
-    TextView text_bulid;
-
-    TextView text_check;
-
-    TextView text_checkpeople;
-
-    TextView text_writepeople;
-
-    TextView text_donepeople;
-
-    TextView text_look_foundation;
-
-    TextView text_look_rocord;
-
-    public static ImageAdapter adapter;
-
-    public static SignAdapter signadapter;
-
-    public static List<Picture> signList = new ArrayList<>();
-
-    public static List<Bitmap> signbitmaps = new ArrayList<>();
 
     private void setBitmap()
     {
@@ -93,9 +71,11 @@ public class LookupFragment extends Fragment {
 
         String foundation = text_word_foundation.getText().toString();
         text_look_foundation.setText(foundation);
+        text_look_foundation.setText(word_foundation);
 
         String record = text_word_record.getText().toString();
         text_look_rocord.setText(record);
+        text_look_rocord.setText(word_question);
 
         if (adapter == null) {
             adapter = new ImageAdapter(getContext(), pictureList, null);

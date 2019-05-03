@@ -94,7 +94,7 @@ public class PolicyLableActivity extends AppCompatActivity {
     }
 
     private void initData () {
-        policies.add(new String[]{"中华人民共和国水法", "2016.7.2"});
+        policies.add(new String[]{"中华人民共和国水法", "2016-07-02"});
         old_filter_policies = policies;
     }
 
