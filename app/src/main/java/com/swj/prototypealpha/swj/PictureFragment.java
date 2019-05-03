@@ -1,6 +1,5 @@
 package com.swj.prototypealpha.swj;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,16 +13,14 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.swj.prototypealpha.R;
-import com.swj.prototypealpha.swj.util.ItemRemoveRecyclerView;
-import com.swj.prototypealpha.swj.util.OnItemClickListener;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -40,15 +37,15 @@ import static android.app.Activity.RESULT_FIRST_USER;
 
 public class PictureFragment extends Fragment {
 
-    public static final int                    TAKE_PHOTO  = 1;
-    public static       Uri                    imageUri;
-    public static       ImageAdapter           adapter;
-    public static       List<List<Picture>>    pictureList = new ArrayList<>();
-    private final       String                 TAG         = "PictureFragment";
-    private             FloatingActionButton   fabtn_picture;
-    private             ItemRemoveRecyclerView recv_photo;
-    private             File                   outputImage;
-    private             int                    itemPosition;
+    public static final int                  TAKE_PHOTO  = 1;
+    public static       Uri                  imageUri;
+    public static       ImageAdapter         adapter;
+    public static       List<List<Picture>>  pictureList = new ArrayList<>();
+    private final       String               TAG         = "PictureFragment";
+    private             FloatingActionButton fabtn_picture;
+    private             RecyclerView         recv_photo;
+    private             File                 outputImage;
+    private             int                  itemPosition;
 
     /**
      * 将图片按照某个角度进行旋转
@@ -80,8 +77,7 @@ public class PictureFragment extends Fragment {
     @Override
     public View onCreateView (LayoutInflater inflater, ViewGroup container,
                               Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        List<Picture> pictures=new ArrayList<>();
+        List<Picture> pictures = new ArrayList<>();
         pictureList.add(pictures);
         return inflater.inflate(R.layout.fragment_picture, container, false);
     }
@@ -101,41 +97,9 @@ public class PictureFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recv_photo = getActivity().findViewById(R.id.recv_photo);
-        //        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(),2);
-        //        recv_photo.setLayoutManager(layoutManager);
         recv_photo.setLayoutManager(linearLayoutManager);
         adapter = new ImageAdapter(getContext(), pictureList, null);
         recv_photo.setAdapter(adapter);
-
-        recv_photo.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick (int position) {
-
-            }
-
-            @Override
-            public void onDeleteClick (int position) {
-                final int pos = position;
-                AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
-                dialog.setTitle("照片");
-                dialog.setMessage("确认删除吗？");
-                dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick (DialogInterface dialog, int which) {
-                        adapter.removeItem(pos);
-                    }
-                });
-                dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick (DialogInterface dialog, int which) {
-
-                    }
-                });
-                dialog.show();
-            }
-        });
-
-
     }
 
     /**
@@ -194,7 +158,6 @@ public class PictureFragment extends Fragment {
         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
         startActivityForResult(intent, TAKE_PHOTO);
-
     }
 
     @Override

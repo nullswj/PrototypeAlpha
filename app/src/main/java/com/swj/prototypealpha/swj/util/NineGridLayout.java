@@ -1,8 +1,13 @@
 package com.swj.prototypealpha.swj.util;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -25,20 +30,81 @@ import java.util.TimerTask;
 public class NineGridLayout extends ViewGroup {
     private static final float DEFUALT_SPACING = 3f;
 
-    protected Context                    mContext;
-    private   float                      image_ratio = 1.0f;//默认图片长宽比例
-    private   int                        oneImageWidth;//一张图的宽度
-    private   int                        oneImageHeight;//一张图的高度
-    private   float                      mSpacing    = DEFUALT_SPACING;
-    private   int                        mColumns;
-    private   int                        mRows;
-    private   int                        mTotalWidth;
-    private   int                        mSingleWidth;
-    private   int                        itemPosition;
-    private   OnItemPictureClickListener listener;
-    private boolean       mIsShowAll = false;
-    private boolean       mIsFirst   = true;
-    private List<Picture> mUrlList   = new ArrayList<>();
+    class MyGesture implements OnTouchListener, GestureDetector.OnGestureListener {
+
+        GestureDetector myGesture = new GestureDetector(getContext(),this);
+        private Picture picture;
+        public MyGesture (Picture url) {
+            picture=url;
+        }
+
+        @Override
+        public boolean onDown (MotionEvent e) {
+            return false;
+        }
+
+        @Override
+        public void onShowPress (MotionEvent e) {
+
+        }
+
+        @Override
+        public boolean onSingleTapUp (MotionEvent e) {
+            return false;
+        }
+
+        @Override
+        public boolean onScroll (MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+            return false;
+        }
+
+        @Override
+        public void onLongPress (MotionEvent e) {
+            System.out.println("sdfsafdsfgasfsadf");
+            AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+            dialog.setTitle("照片");
+            dialog.setMessage("确认删除吗？");
+            dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick (DialogInterface dialog, int which) {
+                    pictures.remove(picture);
+                    notifyDataSetChanged();
+                }
+            });
+            dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick (DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            dialog.show();
+        }
+
+        @Override
+        public boolean onFling (MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            return false;
+        }
+
+        @Override
+        public boolean onTouch (View v, MotionEvent event) {
+            System.out.println("----------------------------");
+            myGesture.onTouchEvent(event);
+            return false;
+        }
+    }
+    protected     Context                    mContext;
+    private       float                      image_ratio     = 1.0f;//默认图片长宽比例
+    private       int                        oneImageWidth;//一张图的宽度
+    private       int                        oneImageHeight;//一张图的高度
+    private       float                      mSpacing        = DEFUALT_SPACING;
+    private       int                        mColumns;
+    private       int                        mRows;
+    private       int                        mTotalWidth;
+    private       int                        mSingleWidth;
+    private       int                        itemPosition;
+    private       OnItemPictureClickListener listener;
+    private       boolean                    mIsShowAll      = false;
+    private       List<Picture>              pictures        = new ArrayList<>();
 
     public NineGridLayout (Context context) {
         this(context, null);
@@ -58,13 +124,8 @@ public class NineGridLayout extends ViewGroup {
 
     private void init (Context context) {
         mContext = context;
-        if (getListSize(mUrlList) == 0) {
-            setVisibility(GONE);
-        } else {
-            setVisibility(VISIBLE);
-        }
+        if (getListSize(pictures) == 0) {setVisibility(GONE);} else {setVisibility(VISIBLE);}
     }
-
 
     @Override
     protected void onLayout (boolean changed, int left, int top, int right, int bottom) {
@@ -92,14 +153,7 @@ public class NineGridLayout extends ViewGroup {
     }
 
     public void setUrlList (List<Picture> urlList) {
-        if (getListSize(urlList) == 0) {
-            setVisibility(GONE);
-            return;
-        }
-        setVisibility(VISIBLE);
-
-        mUrlList.clear();
-        mUrlList.addAll(urlList);
+        pictures = urlList;
         notifyDataSetChanged();
     }
 
@@ -113,45 +167,21 @@ public class NineGridLayout extends ViewGroup {
     }
 
     private void refresh () {
-        requestLayout();
-        invalidate();
-        int size = getListSize(mUrlList);
+        removeAllViews();
+        int size = getListSize(pictures);
         if (size > 0) {
             setVisibility(VISIBLE);
         } else {
             setVisibility(GONE);
             return;
         }
-//
-//        if (size == 1) {
-//            Picture url = mUrlList.get(0);
-//            RatioImageView imageView = createImageView(0, url);
-//
-//            getRealOneImageSize();
-//            imageView.layout(0, 0, oneImageWidth, oneImageHeight);
-//            LayoutParams params = getLayoutParams();
-//            params.height = oneImageHeight;
-//            setLayoutParams(params);
-//            addView(imageView);
-//            displayImage(0, imageView, url);
-//            return;
-//        }
 
         generateChildrenLayout(size);
         layoutParams();
-                for (int i = 0; i < size; i++) {
-                    Picture url = mUrlList.get(i);
-                    RatioImageView imageView = createImageView(i, url);
-                    layoutImageView(imageView, i, url);
-                }
-    }
-
-    private void getRealOneImageSize () {
-        if (oneImageWidth == 0) {
-            oneImageWidth = mSingleWidth;
-        }
-        if (oneImageHeight == 0) {
-            oneImageHeight = (int) (oneImageWidth * image_ratio);
+        for (int i = 0; i < size; i++) {
+            Picture url = pictures.get(i);
+            RatioImageView imageView = createImageView(i, url);
+            layoutImageView(imageView, i, url);
         }
     }
 
@@ -164,20 +194,24 @@ public class NineGridLayout extends ViewGroup {
         setLayoutParams(params);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private RatioImageView createImageView (final int i, final Picture url) {
         final RatioImageView imageView = new RatioImageView(mContext);
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        imageView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick (View v) {
-                onClickAImage(i, url, mUrlList, imageView);
-            }
-
-            private void onClickAImage (int imageIndex, Picture url, List<Picture> urlList,
-                                        ImageView imageView) {
-                listener.onItemPictureClick(itemPosition, imageIndex, url, urlList, imageView);
-            }
-        });
+        //        imageView.setOnClickListener(new OnClickListener() {
+        //            @Override
+        //            public void onClick (View v) {
+        //                onClickAImage(i, url, pictures, imageView);
+        //            }
+        //
+        //            private void onClickAImage (int imageIndex, Picture url, List<Picture>
+        //            urlList,
+        //                                        ImageView imageView) {
+        //                listener.onItemPictureClick(itemPosition, imageIndex, url, urlList,
+        //                imageView);
+        //            }
+        //        });
+        imageView.setOnTouchListener(new MyGesture(url));
         return imageView;
     }
 
@@ -217,20 +251,7 @@ public class NineGridLayout extends ViewGroup {
     }
 
     private int[] findPosition (int childNum) {
-        //        return new int[]{childNum % mColumns == 0 ? childNum / mColumns - 1 : childNum
-        //        / mColumns
-        //                , childNum % mColumns == 0 ? mRows : childNum % mColumns - 1};
-        int[] position = new int[2];
-        for (int i = 0; i < mRows; i++) {
-            for (int j = 0; j < mColumns; j++) {
-                if ((i * mColumns + j) == childNum) {
-                    position[0] = i;//行
-                    position[1] = j;//列
-                    break;
-                }
-            }
-        }
-        return position;
+        return new int[]{childNum / mColumns, childNum - (childNum / mColumns) * mColumns};
     }
 
     /**
@@ -239,19 +260,6 @@ public class NineGridLayout extends ViewGroup {
      * @param length
      */
     private void generateChildrenLayout (int length) {
-        //        if (length <= 3) {
-        //            mRows = 1;
-        //            mColumns = length;
-        //        } else if (length <= 6) {
-        //            mRows = 2;
-        //            mColumns = length == 4 ? 4 : 3;
-        //        } else {
-        //            mColumns = 3;
-        //            if (mIsShowAll)
-        //                mRows = (int) Math.ceil(length / 3);
-        //            else
-        //                mRows = 3;
-        //        }
         if (length <= 3) {
             mRows = 1;
             mColumns = length;

@@ -7,6 +7,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 
 import com.swj.prototypealpha.R;
@@ -21,16 +22,17 @@ import com.swj.prototypealpha.R;
  */
 public class RatioImageView extends AppCompatImageView {
 
+    private       boolean         isMotionActionUp = false;
     /**
      * 宽高比例
      */
-    private float mRatio = 0f;
+    private       float           mRatio           = 0f;
 
-    public RatioImageView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public RatioImageView (Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
-    public RatioImageView(Context context, AttributeSet attrs) {
+    public RatioImageView (Context context, AttributeSet attrs) {
         super(context, attrs);
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.RatioImageView);
 
@@ -38,7 +40,7 @@ public class RatioImageView extends AppCompatImageView {
         typedArray.recycle();
     }
 
-    public RatioImageView(Context context) {
+    public RatioImageView (Context context) {
         super(context);
     }
 
@@ -47,12 +49,12 @@ public class RatioImageView extends AppCompatImageView {
      *
      * @param ratio
      */
-    public void setRatio(float ratio) {
+    public void setRatio (float ratio) {
         mRatio = ratio;
     }
 
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+    protected void onMeasure (int widthMeasureSpec, int heightMeasureSpec) {
         int width = MeasureSpec.getSize(widthMeasureSpec);
         if (mRatio != 0) {
             float height = width / mRatio;
@@ -62,27 +64,7 @@ public class RatioImageView extends AppCompatImageView {
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
-
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                Drawable drawable = getDrawable();
-                if (drawable != null) {
-                    drawable.mutate().setColorFilter(Color.GRAY,
-                            PorterDuff.Mode.MULTIPLY);
-                }
-                break;
-            case MotionEvent.ACTION_MOVE:
-                break;
-            case MotionEvent.ACTION_CANCEL:
-            case MotionEvent.ACTION_UP:
-                Drawable drawableUp = getDrawable();
-                if (drawableUp != null) {
-                    drawableUp.mutate().clearColorFilter();
-                }
-                break;
-        }
-
-        return super.onTouchEvent(event);
+    public boolean onTouchEvent (MotionEvent event) {
+        return false;
     }
 }
