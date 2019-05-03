@@ -6,22 +6,28 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         tools:ignore="MissingConstraints">
+
         <TextView
             android:id="@+id/policy_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="276dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="policy_name"
-            android:layout_gravity="center"/>
+            android:textAlignment="viewStart" />
+
         <TextView
             android:id="@+id/policy_time"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="212dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="policy_time"
-            android:layout_gravity="center"/>
+            android:textAlignment="viewStart" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
