@@ -50,15 +50,15 @@ public class LookupFragment extends Fragment {
     TextView             text_look_rocord;
     private SignItemRecyclerView recv_sign;
 
-    TextView text_look_proj;
-
-    TextView text_look_time;
-
-    TextView text_look_addr;
-
-    TextView text_bulid;
-
-    TextView text_check;
+//    TextView text_look_proj;
+//
+//    TextView text_look_time;
+//
+//    TextView text_look_addr;
+//
+//    TextView text_bulid;
+//
+//    TextView text_check;
 
     TextView text_checkpeople;
 
@@ -66,17 +66,17 @@ public class LookupFragment extends Fragment {
 
     TextView text_donepeople;
 
-    TextView text_look_foundation;
-
-    TextView text_look_rocord;
-
-    public static ImageAdapter adapter;
-
-    public static SignAdapter signadapter;
-
-    public static List<Picture> signList = new ArrayList<>();
-
-    public static List<Bitmap> signbitmaps = new ArrayList<>();
+//    TextView text_look_foundation;
+//
+//    TextView text_look_rocord;
+//
+//    public static ImageAdapter adapter;
+//
+//    public static SignAdapter signadapter;
+//
+//    public static List<Picture> signList = new ArrayList<>();
+//
+//    public static List<Bitmap> signbitmaps = new ArrayList<>();
 
     private void setBitmap()
     {

@@ -71,7 +71,7 @@ public class CheckPerson extends AppCompatActivity implements OnItemClickListene
         btn_addPerson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CheckPerson.this,AddLocActivity.class);
+                Intent intent = new Intent(CheckPerson.this,StartActivity.class);
                 startActivity(intent);
             }
         });
@@ -141,7 +141,8 @@ public class CheckPerson extends AppCompatActivity implements OnItemClickListene
 
     @Override
     public void onItemClick(int position) {
-
+        Intent intent = new Intent(CheckPerson.this,AddLocActivity.class);
+        startActivity(intent);
     }
 
     @Override
