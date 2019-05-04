@@ -13,65 +13,6 @@ import com.swj.prototypealpha.swj.util.OnItemPictureClickListener;
 
 import java.util.List;
 
-//public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> {
-//
-//    String TAG = "ImageAdapter";
-//
-//    private Context context;
-//
-//    private List<Picture> pictures;
-//
-//
-//    public static class ViewHolder extends RecyclerView.ViewHolder
-//    {
-//        public CardView cardView;
-//        public ImageView imageView;
-//
-//        public ViewHolder(View view)
-//        {
-//            super(view);
-//            cardView = (CardView)view;
-//            imageView = view.findViewById(R.id.image);
-//        }
-//    }
-//
-//    public ImageAdapter(List<Picture> pictures)
-//    {
-//        this.pictures = pictures;
-//    }
-//
-//    @NonNull
-//    @Override
-//    public ImageAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-//        if(context == null)
-//        {
-//            context = viewGroup.getContext();
-//        }
-//        View view = LayoutInflater.from(context).inflate(R.layout.image_item,viewGroup,false);
-//
-//        return new ViewHolder(view);
-//    }
-//
-//    @Override
-//    public void onBindViewHolder(@NonNull ImageAdapter.ViewHolder viewHolder, int i) {
-//        Picture picture = pictures.get(i);
-//        viewHolder.imageView.setImageBitmap(picture.getImageID());
-//    }
-//
-//    @Override
-//    public int getItemCount() {
-//        return pictures.size();
-//    }
-//
-//    public void removeItem(int position) {
-//        Log.e(TAG, "removeItem: "+"size"+getItemCount());
-//        Log.e(TAG, "removeItem: "+ position);
-//        pictures.remove(position);
-//        notifyItemRemoved(position);
-//        notifyDataSetChanged();
-//    }
-//}
-
 public class ImageAdapter extends RecyclerView.Adapter<ImageHodler>{
 
     private Context context;

@@ -38,8 +38,6 @@ public class LookupFragment extends Fragment {
     public static SignAdapter   signadapter;
     public static List<Picture> signList    = new ArrayList<>();
     public static List<Bitmap>  signbitmaps = new ArrayList<>();
-    public static List<String>  urlList     = new ArrayList<>();
-
     FloatingActionButton fabtn_lookup;
     HandWriteView        handWriteView;
     RecyclerView         recv_photo;
@@ -50,29 +48,16 @@ public class LookupFragment extends Fragment {
     TextView             text_check;
     TextView             text_look_foundation;
     TextView             text_look_rocord;
+    TextView             text_checkpeople;
+    TextView             text_writepeople;
+    TextView             text_donepeople;
+
     private SignItemRecyclerView recv_sign;
 
-//    TextView text_look_proj;
-//
-//    TextView text_look_time;
-//
-//    TextView text_look_addr;
-//
-//    TextView text_bulid;
-//
-//    TextView text_check;
-
-
-    TextView text_checkpeople;
-    TextView text_donepeople;
-    TextView text_writepeople;
-
-
-    private void setBitmap()
-    {
-        signbitmaps.add(BitmapFactory.decodeResource(getResources(),R.mipmap.sign1));
-        signbitmaps.add(BitmapFactory.decodeResource(getResources(),R.mipmap.sign2));
-        signbitmaps.add(BitmapFactory.decodeResource(getResources(),R.mipmap.sign3));
+    private void setBitmap () {
+        signbitmaps.add(BitmapFactory.decodeResource(getResources(), R.mipmap.sign1));
+        signbitmaps.add(BitmapFactory.decodeResource(getResources(), R.mipmap.sign2));
+        signbitmaps.add(BitmapFactory.decodeResource(getResources(), R.mipmap.sign3));
     }
 
     @Override
@@ -140,8 +125,8 @@ public class LookupFragment extends Fragment {
         text_donepeople.setText("王五");
 
         recv_photo = getActivity().findViewById(R.id.recv_lookup_picture);
-        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
-        recv_photo.setLayoutManager(layoutManager);
+//        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
+//        recv_photo.setLayoutManager(layoutManager);
 
         recv_sign = getActivity().findViewById(R.id.recv_lookup_sign);
         GridLayoutManager signManager = new GridLayoutManager(getActivity(), 2);

@@ -40,8 +40,6 @@ public class ImageHodler extends RecyclerView.ViewHolder {
     }
 
     public void bindViewHolder (List<Picture> list, int position) {
-        nineGridLayout.setListener(listener);
         setUrlList(list);
-        nineGridLayout.setItemPosition(position);
     }
 }
