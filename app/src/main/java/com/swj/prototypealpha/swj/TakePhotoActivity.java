@@ -115,9 +115,6 @@ public class TakePhotoActivity extends AppCompatActivity implements View.OnClick
                     try
                     {
                         Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(m_imageUri));
-
-
-
                         switch (getBitmapDegree())
                         {
                             case 90:

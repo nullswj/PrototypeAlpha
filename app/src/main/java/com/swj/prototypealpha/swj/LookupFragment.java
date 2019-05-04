@@ -9,6 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,23 +64,33 @@ public class LookupFragment extends Fragment {
     @Override
     public void onHiddenChanged (boolean hidden) {
         super.onHiddenChanged(hidden);
-        if (pictureList == null || text_word_record == null || text_word_foundation == null)
-            return;
-
-        String foundation = text_word_foundation.getText().toString();
-        text_look_foundation.setText(foundation);
-        text_look_foundation.setText(word_foundation);
-
-        String record = text_word_record.getText().toString();
-        text_look_rocord.setText(record);
-        text_look_rocord.setText(word_question);
-
-        if (adapter == null) {
-            adapter = new ImageAdapter(getContext(), pictureList, null);
-            recv_photo.setAdapter(adapter);
+        if(text_look_foundation!= null)
+        {
+            String foundation = text_word_foundation.getText().toString();
+            text_look_foundation.setText(foundation);
+            text_look_foundation.setText(word_foundation);
         }
-        int len = pictureList.size();
-        adapter.notifyItemChanged(0, len);
+
+        if(text_word_record != null)
+        {
+            String record = text_word_record.getText().toString();
+            text_look_rocord.setText(record);
+            text_look_rocord.setText(word_question);
+        }
+        if(pictureList != null)
+        {
+            if (adapter == null) {
+                adapter = new ImageAdapter(getContext(), pictureList, null);
+                recv_photo.setAdapter(adapter);
+            }
+            int len = pictureList.size();
+            adapter.notifyItemChanged(0, len);
+        }
+
+
+
+
+
     }
 
 
@@ -126,7 +137,10 @@ public class LookupFragment extends Fragment {
 
         recv_photo = getActivity().findViewById(R.id.recv_lookup_picture);
 //        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
-//        recv_photo.setLayoutManager(layoutManager);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recv_photo.setLayoutManager(linearLayoutManager);
 
         recv_sign = getActivity().findViewById(R.id.recv_lookup_sign);
         GridLayoutManager signManager = new GridLayoutManager(getActivity(), 2);
@@ -172,7 +186,7 @@ public class LookupFragment extends Fragment {
                 Random random = new Random();
                 Picture picture = new Picture(signbitmaps.get(random.nextInt(2)));
                 signList.add(picture);
-                int len = pictureList.size();
+                int len = signList.size();
                 signadapter.notifyItemChanged(len - 1);
                 signadapter.notifyItemChanged(0, len);
             }
