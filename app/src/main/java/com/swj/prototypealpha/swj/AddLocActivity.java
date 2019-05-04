@@ -86,7 +86,6 @@ public class AddLocActivity extends AppCompatActivity implements OnItemClickList
         double theta = Math.atan2(y, x) - 0.000003 * Math.cos(x * x_pi);
         lon = z * Math.cos(theta);
         lat = z * Math.sin(theta);
-
     }
 
     public class MyLocationListener extends BDAbstractLocationListener {
@@ -208,15 +207,7 @@ public class AddLocActivity extends AppCompatActivity implements OnItemClickList
 //            }
 //        });
 
-        final Handler handler = new Handler()
-        {
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                String Url = "https://m.amap.com/picker/?keywords=写字楼,小区,学校&zoom=15&center="+lon+","+lat+"&radius=200&total=20&key=160d1eaca139c23db4e6f46d87f8e4bc";
-                webView.loadUrl(Url);
-            }
-        };
+
 
         new Thread(new Runnable() {
             @Override
@@ -255,6 +246,15 @@ public class AddLocActivity extends AppCompatActivity implements OnItemClickList
         });
 
     }
+    Handler handler = new Handler()
+    {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            String Url = "https://m.amap.com/picker/?keywords=写字楼,小区,学校&zoom=15&center="+lon+","+lat+"&radius=200&total=20&key=160d1eaca139c23db4e6f46d87f8e4bc";
+            webView.loadUrl(Url);
+        }
+    };
 
     @Override
     protected void onDestroy() {
